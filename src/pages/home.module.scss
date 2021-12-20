@@ -1,0 +1,45 @@
+.header {
+    background: var(--brown-500);
+    color: var(--white-200);
+    height: 17.5rem;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1.5rem 0 1rem;
+
+    border-bottom: 1.5px solid #4F4F5B;
+
+    span {
+        display: flex;
+
+        img {
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+.perfil {
+    display: flex;
+    align-items: center;
+    
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-right: 1.25rem;
+
+        span {
+            font-size: 0.875rem;
+            line-height: 1.5rem;
+            color: var(--gray-300);
+        }
+    }
+}
+
+.summary {
+
+}
