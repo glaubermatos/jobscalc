@@ -1,0 +1,31 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --brown-500: #41414C;
+    --orange-500: #F1972C;
+    --green-500: #36B236;
+
+    --white-500: #FCFDFF;
+    --white-200: #F0F2F5;
+
+    --gray-300: #BFBFCC;
+    --gray-500: #5A5A66;
+    --gray-700: #5A5A66;
+}
+
+body {
+    background: var(--white-200);
+
+    h1 {
+        font-size: 3rem;
+        color: var(--orange-500);
+    }
+}
+
+body, button, input, textarea {
+    font: 400 1rem 'Inter', sans-serif;
+}
