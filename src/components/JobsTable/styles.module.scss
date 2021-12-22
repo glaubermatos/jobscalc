@@ -1,0 +1,119 @@
+.jobsTable {
+    width: 100%;
+
+    height: 70vh;
+    overflow-y: auto;
+}
+
+.job {
+    height: 6rem;
+    background: var(--white-500);
+    border-radius: 0.3125rem;
+    padding: 0 2rem;
+
+    border: solid 1px var(--gray-200);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+    
+    & + .job {
+        margin-top: 0.5rem;
+    }
+
+    &:hover {
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(
+                    90deg,
+                    rgba(250, 156, 45, 0.1) 0.45%,
+                    rgba(252, 253, 255, 0.1) 31.4%
+                );
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: -1px;
+            top: 0;
+            width: 0.25rem;
+            height: 100%;
+            border-radius: 0.3125rem 0 0 0.3125rem;
+            background: var(--orange-500);
+        }
+    }
+    
+    span {
+        color: var(--gray-300);
+    }
+
+    .row {
+        min-width: 17.5rem;
+        font: 600 1rem 'IBM Plex Sans', sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+
+        strong {
+            color: var(--gray-500);
+            font-weight: 600;
+            font-size: 1.5rem;
+            line-height: 2.125rem;
+        }
+    }
+
+    .column {
+        display: flex;
+        flex-direction: column;
+        font-weight: 600;
+
+        span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            line-height: 1.375rem;
+        }
+
+        strong {
+            color: var(--gray-400);
+        }
+    }
+
+    .status {
+        height: 2.5rem;
+        border-radius: 2.5rem;
+        background: var(--green-50);
+        color: var(--green-500);
+        padding: 0 1.5rem;
+
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 1.625rem;
+
+        display: flex;
+        align-items: center;
+    }
+
+    .actions {
+        display: flex;
+        gap: 0.5rem;
+        
+        button {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--white-500);
+            border: solid 1px var(--gray-200);
+            border-radius: 0.3125rem;
+
+            svg {
+                stroke: var(--gray-400);
+            }
+        }
+    }
+}

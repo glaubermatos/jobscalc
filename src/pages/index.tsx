@@ -1,4 +1,5 @@
 import { ButtonNewJob } from '../components/ButtonNewJob'
+import { JobsTable } from '../components/JobsTable'
 import commomStyles from '../styles/commom.module.scss'
 import styles from './home.module.scss'
 
@@ -40,6 +41,11 @@ export default function Home() {
           </div>
         </div>
       </header>
+      <main className={styles.content}>
+        <section className={commomStyles.container}>
+          <JobsTable />
+        </section>
+      </main>
     </>
   )
 }
