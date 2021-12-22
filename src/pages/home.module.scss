@@ -23,6 +23,8 @@
 }
 
 .perfil {
+    font-family: 'IBM Plex Sans', sans-serif;
+    
     display: flex;
     align-items: center;
     
@@ -38,8 +40,36 @@
             color: var(--gray-300);
         }
     }
+
+    &:hover span {
+        text-decoration: underline;
+        color: var(--orange-500);
+    }
 }
 
 .summary {
+    margin: 2rem 0 2.5rem;
 
+    display: flex;
+    justify-content: space-between;
+}
+
+.amounts {
+    display: flex;
+    gap: 2.5rem;
+
+    div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    strong {
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1.625rem;
+    }
+
+    span {        
+        line-height: 1.625rem;
+    }
 }

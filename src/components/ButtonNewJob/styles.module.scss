@@ -1,0 +1,25 @@
+.buttonNewJob {
+    height: 3.5rem;
+    border-radius: 0.3125rem;
+    background: var(--orange-500);
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.625rem;
+    color: var(--white-500);
+    padding: 0 2rem 0 0.75rem;
+    border: none;
+
+    display: flex;
+    align-items: center;
+
+    transition: background 0.2s;
+
+    img {
+        margin-right: 2rem;
+    }
+
+    &:hover {
+        background: var(--orange-400);
+    }
+}

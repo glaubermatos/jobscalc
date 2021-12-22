@@ -7,6 +7,7 @@
 :root {
     --brown-500: #41414C;
     --orange-500: #F1972C;
+    --orange-400: #FA9C2D;
     --green-500: #36B236;
 
     --white-500: #FCFDFF;
@@ -26,6 +27,20 @@ body {
     }
 }
 
-body, button, input, textarea {
+body, input, textarea {
     font: 400 1rem 'Inter', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    font: 700 0.875rem 'IBM Plex Sans', sans-serif;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
 }
