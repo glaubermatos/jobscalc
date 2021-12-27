@@ -2,26 +2,36 @@ import { FiEdit3, FiTrash } from 'react-icons/fi'
 
 import styles from './styles.module.scss'
 
-export function JobsTable() {
-    const jobs = ['Pizzaria Guloso', 'Prust Modas', 'Onetwo Project', 'Los Hermanos', 'Agenda profissinal']
+interface Job {
+  id: number;
+  project: string;
+  deadline: number;
+  amount: number;
+  status: string;
+}
 
+interface JobsTableProps {
+  jobs: Job[]
+}
+
+export function JobsTable({jobs}: JobsTableProps) {
     return <div className={styles.jobsTable}>
-       {jobs.map((job, index) => (
-            <div className={styles.job}>
+       {jobs.map((job) => (
+            <div key={job.id} className={styles.job}>
                 <div className={styles.row}>
-                    <span>{index + 1}</span>
-                    <strong>{job}</strong>
+                    <span>{job.id}</span>
+                    <strong>{job.project}</strong>
                 </div>
                 <div className={styles.column}>
                     <span>Prazo</span>
-                    <strong>3 dias para entrega</strong>
+                    <strong>{job.deadline}</strong>
                 </div>
                 <div className={styles.column}>
                     <span>Valor</span>
-                    <strong>R$ 4.500,00</strong>
+                    <strong>{job.amount}</strong>
                 </div>
                 <div className={styles.status}>
-                    Em andamento
+                    {job.status}
                 </div>
                 <div className={styles.actions}>
                     <button>
