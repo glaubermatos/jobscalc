@@ -3,7 +3,7 @@ import { FiEdit3, FiTrash } from 'react-icons/fi'
 import styles from './styles.module.scss'
 
 export function JobsTable() {
-    const jobs = ['Pizzaria Guloso', 'Prust Modas', 'Onetwo Project', 'Los Hermanos', 'Onetwo Project']
+    const jobs = ['Pizzaria Guloso', 'Prust Modas', 'Onetwo Project', 'Los Hermanos', 'Agenda profissinal']
 
     return <div className={styles.jobsTable}>
        {jobs.map((job, index) => (
