@@ -1,7 +1,16 @@
+import { ReactNode } from 'react'
 import styles from './styles.module.scss'
 
-export function Button() {
-    return <button className={styles.buttonWrapper}>
-        Salvar dados
-    </button>
+interface ButtonProps {
+    children: ReactNode;
+    color?: 'primary' | 'danger' | 'default'
+}
+
+export function Button({children, color = 'default'}: ButtonProps) {
+    return(
+        <button 
+            className={`${styles.buttonWrapper} ${color !== 'default' ? (color === 'primary' ? styles.primary : styles.danger) : null}`}>
+            {children}
+        </button>
+    )
 }

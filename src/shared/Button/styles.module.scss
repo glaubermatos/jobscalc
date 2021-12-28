@@ -1,16 +1,42 @@
 .buttonWrapper {
     height: 3.125rem;
-    background: var(--green-500);
     border: 0;
     border-radius: 0.3125rem;
-    color: var(--white-500);
     text-transform: uppercase;
     padding: 0 3rem;
     line-height: 1.625rem;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: var(--gray-200);
+    
     transition: background 0.2s;
 
     &:hover {
-        background: var(--green-400);
+        background: var(--gray-100);
+    }
+
+    svg {
+        stroke: var(--gray-400);
+    }
+    
+    &.primary {
+        background: var(--green-500);
+        color: var(--white-500);
+
+        &:hover {
+            background: var(--green-400);
+        }
+    }
+    
+    &.danger {
+        background: var(--red-500);
+        color: var(--white-500);
+
+        &:hover {
+            background: var(--red-400);
+        }
     }
 }

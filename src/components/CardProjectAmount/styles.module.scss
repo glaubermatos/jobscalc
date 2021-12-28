@@ -1,0 +1,36 @@
+.cardWrapper {
+    max-width: 22rem;
+    height: 20.625rem;
+    background: var(--white-500);
+    border: 1px solid var(--gray-200);
+    border-radius: 0.3125rem;
+    padding: 2.5rem 3.375rem;
+    
+    text-align: center;
+
+    p {
+        width: 15.25rem;
+        margin-top: 1.5rem;
+        color: var(--gray-500);
+        line-height: 1.625rem;
+    }
+
+    strong {
+        display: block;
+        font-weight: 600;
+    }
+
+    .actions {
+        margin-top: 3rem;
+        display: flex;
+        gap: 1rem;
+
+        button:first-child {
+            flex: 1;
+        }
+
+        button:last-child {
+            padding: 0 0.75rem;
+        }
+    }
+}

@@ -14,7 +14,7 @@ export default function Profile() {
                 <title>Profile | JobsCalc</title>
             </Head>
             <Header title='Meu perfil' />
-            <main className={styles.wrapper}>
+            <main className={commomStyles.wrapper}>
                 <section className={commomStyles.container}>
                     <form action="#" className={styles.formContainer}>
                         <aside className={styles.hourValueCard}>
@@ -23,7 +23,9 @@ export default function Profile() {
                             <p>O valor da sua hora é <strong>R$ 75,00 reais</strong>
                             </p>
                             
-                            <Button />
+                            <Button color='primary'>
+                                Salvar dados
+                            </Button>
                         </aside>
                         <div className={styles.profileData}>
                             <div className={styles.fieldGroup}>

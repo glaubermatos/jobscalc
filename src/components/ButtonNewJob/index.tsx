@@ -7,7 +7,7 @@ export function ButtonNewJob() {
     const routes = useRouter()
 
     function navigateToNewJobPage() {
-        routes.push('/jobs/create')
+        routes.push('/jobs/new')
     }
 
     return <button onClick={navigateToNewJobPage}

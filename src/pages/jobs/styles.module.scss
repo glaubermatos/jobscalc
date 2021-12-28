@@ -1,0 +1,36 @@
+.formContainer {
+    display: flex;
+    gap: 7.375rem;
+}
+
+.jobsData {
+    flex: 1;
+}
+
+.fieldGroup {
+
+    h3 {
+        display: block;
+        font: 600 2rem 'IBM Plex Sans', sans-serif;
+        color: var(--gray-500);
+        border-bottom: 1px solid var(--gray-200);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .row {
+        margin-top: 2rem;
+
+    }
+    
+    .grid2 {
+        margin-top: 2rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    & + .fieldGroup {
+        margin-top: 3.5rem;
+    }
+}
