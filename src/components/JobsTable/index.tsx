@@ -12,10 +12,11 @@ interface Job {
 }
 
 interface JobsTableProps {
-  jobs: Job[]
+  jobs: Job[];
+  onOpenModalDeleteJob: () => void;
 }
 
-export function JobsTable({jobs}: JobsTableProps) {
+export function JobsTable({jobs, onOpenModalDeleteJob}: JobsTableProps) {
     const router = useRouter()
 
     function navigateToEditJob(jobId: number) {
@@ -46,7 +47,7 @@ export function JobsTable({jobs}: JobsTableProps) {
                     <button onClick={() => navigateToEditJob(job.id)}> 
                         <FiEdit3 size={24} />
                     </button>
-                    <button>
+                    <button onClick={onOpenModalDeleteJob}>
                         <FiTrash size={24} />
                     </button>
                 </div>

@@ -1,13 +1,18 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+
+import Modal from 'react-modal'
 
 import { ButtonNewJob } from '../components/ButtonNewJob'
 import { JobsTable } from '../components/JobsTable'
+import { ModalDeleteJob } from '../components/ModalDeleteJob'
 
 import commomStyles from '../styles/commom.module.scss'
 import styles from './home.module.scss'
+
+Modal.setAppElement('#root')
 
 interface Job {
   id: number;
@@ -22,6 +27,16 @@ interface HomeProps {
 }
 
 export default function Home({jobs}: HomeProps) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  function handleOpenModalDeleteJob() {
+    setIsOpen(true)
+  }
+
+  function handleCloseModalDeleteJob() {
+    setIsOpen(false)
+  }
+
   return (
     <>
       <Head>
@@ -66,9 +81,14 @@ export default function Home({jobs}: HomeProps) {
       </header>
       <main className={styles.content}>
         <section className={commomStyles.container}>
-          <JobsTable jobs={jobs} />
+          <JobsTable 
+            jobs={jobs}
+            onOpenModalDeleteJob={handleOpenModalDeleteJob}
+          />
         </section>
       </main>
+      
+      <ModalDeleteJob isOpen={isOpen} onRequestClose={handleCloseModalDeleteJob} />
     </>
   )
 }

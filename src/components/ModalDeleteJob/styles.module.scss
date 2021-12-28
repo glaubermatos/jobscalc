@@ -1,0 +1,68 @@
+.reactModalOverlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background: rgba(65, 65, 76, 0.9);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reactModalContent {
+    max-width: 28rem;
+    background: var(--white-200);
+    border-radius: 0.3125rem;
+    padding: 2.5rem 2.625rem;
+}
+
+.modalBody {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        stroke: var(--gray-400);
+    }
+
+    strong {
+        margin-top: 2rem;
+        font: 600 2rem 'IBM Plex Sans', sans-serif;
+        color: var(--gray-500);
+        line-height: 2.5rem;
+    }
+
+    p {
+        max-width: 13.6875rem;
+        margin: 0.5rem 0 2rem;
+        font: 500 1rem 'IBM Plex Sans', sans-serif;
+        line-height: 1.5rem;
+        color: var(--gray-400);
+        text-align: center;
+    }
+
+    .modalActions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button + button {
+            margin-left: 0.5rem;
+        }
+
+        // button {
+        //     display: inline-block;
+    
+        //     & + button {
+        //         margin-left: 0.5rem;
+        //     }
+        // }
+    }
+
+    
+}
