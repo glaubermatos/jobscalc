@@ -8,8 +8,13 @@
     --brown-500: #41414C;
     --orange-500: #F1972C;
     --orange-400: #FA9C2D;
+
+    --green-400: #3CC73C;
     --green-500: #36B236;
     --green-50: #E8F8E8;
+
+    --red-50: #FAECEB;
+    --red-500: #EB3B35;
 
     --white-500: #FCFDFF;
     --white-200: #F0F2F5;
@@ -22,10 +27,12 @@
 
 body {
     background: var(--white-200);
+    font: 400 1rem 'Inter', sans-serif;
 }
 
-body, input, textarea {
-    font: 400 1rem 'Inter', sans-serif;
+input, label, textarea {
+    font: 500 1rem 'IBM Plex Sans', sans-serif;
+    line-height: 1.5rem;
 }
 
 a {

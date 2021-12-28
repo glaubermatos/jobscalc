@@ -59,7 +59,7 @@
     }
 
     .row {
-        width: 17.5rem;
+        width: 22rem;
         font: 600 1rem 'IBM Plex Sans', sans-serif;
         display: flex;
         align-items: center;
@@ -71,6 +71,13 @@
             font-size: 1.5rem;
             line-height: 2.125rem;
         }
+    }
+
+    .content {
+        flex: 1;
+        display: flex;
+        justify-content: flex-start;
+        gap: 3.5rem;
     }
 
     .column {
@@ -92,8 +99,6 @@
     .status {
         height: 2.5rem;
         border-radius: 2.5rem;
-        background: var(--green-50);
-        color: var(--green-500);
         padding: 0 1.5rem;
 
         font-size: 0.875rem;
@@ -102,6 +107,15 @@
 
         display: flex;
         align-items: center;
+
+        &.inProgress {
+            background: var(--green-50);
+            color: var(--green-500);
+        }
+        &.closed {
+            background: var(--red-50);
+            color: var(--red-500);
+        }
     }
 
     .actions {

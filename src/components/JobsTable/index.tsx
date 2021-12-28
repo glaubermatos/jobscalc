@@ -5,8 +5,8 @@ import styles from './styles.module.scss'
 interface Job {
   id: number;
   project: string;
-  deadline: number;
-  amount: number;
+  deadline: string;
+  amount: string;
   status: string;
 }
 
@@ -22,16 +22,18 @@ export function JobsTable({jobs}: JobsTableProps) {
                     <span>{job.id}</span>
                     <strong>{job.project}</strong>
                 </div>
-                <div className={styles.column}>
-                    <span>Prazo</span>
-                    <strong>{job.deadline}</strong>
-                </div>
-                <div className={styles.column}>
-                    <span>Valor</span>
-                    <strong>{job.amount}</strong>
-                </div>
-                <div className={styles.status}>
-                    {job.status}
+                <div className={styles.content}>
+                    <div className={styles.column}>
+                        <span>Prazo</span>
+                        <strong>{job.deadline}</strong>
+                    </div>
+                    <div className={styles.column}>
+                        <span>Valor</span>
+                        <strong>{job.amount}</strong>
+                    </div>
+                    <div className={`${styles.status} ${job.status === 'Em andamento' ? (styles.inProgress) : (styles.closed)}`}>
+                        {job.status}
+                    </div>
                 </div>
                 <div className={styles.actions}>
                     <button>

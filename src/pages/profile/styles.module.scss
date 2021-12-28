@@ -1,0 +1,72 @@
+.wrapper {
+    margin-top: 4rem;
+}
+
+.formContainer {
+    display: flex;
+    gap: 7.375rem;
+}
+
+.hourValueCard {
+    max-width: 22.25rem;
+    background: var(--white-500);
+    border: 1px solid var(--gray-200);
+    border-radius: 0.3125rem;
+    padding: 3.875rem 4.75rem;
+    
+    text-align: center;
+
+    h2 {
+        margin-top: 1.5rem;
+        font: 600 1.75rem 'IBM Plex Sans', sans-serif;
+        color: var(--gray-500);
+        line-height: 1.875rem;
+    }
+
+    p {
+        margin-top: 4rem;
+        color: var(--gray-500);
+        font-size: 1.25rem;
+        line-height: 1.875rem;
+    }
+
+    strong {
+        display: block;
+        font-weight: 600;
+    }
+
+    button {
+        margin-top: 1.5rem;
+    }
+}
+
+.profileData {
+    flex: 1;
+
+    h3 {
+        display: block;
+        font: 600 2rem 'IBM Plex Sans', sans-serif;
+        color: var(--gray-500);
+        border-bottom: 1px solid var(--gray-200);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+}
+
+.fieldGroup {
+    
+    .row {
+        margin-top: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+
+        div {
+            max-width: 48.125%;
+        }
+    }
+
+    & + .fieldGroup {
+        margin-top: 3.5rem;
+    }
+}

@@ -12,8 +12,8 @@ import styles from './home.module.scss'
 interface Job {
   id: number;
   project: string;
-  deadline: number;
-  amount: number;
+  deadline: string;
+  amount: string;
   status: string;
 }
 
@@ -79,20 +79,33 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       jobs:[{
         id: 1,
-        project: 'Site George',
-        deadline: 259200,
-        amount: 280000,
-        status: 'InProgress'
+        project: 'Pizzaria Guloso',
+        deadline: '3 dias para entrega',
+        amount: 'R$ 4.500,00',
+        status: 'Em andamento'
 
-    },
-    {
-        id: 2,
-        project: 'Sistema de agendamento',
-        deadline: 604800,
-        amount: 150000,
-        status: 'InProgress'
+    },{
+      id: 2,
+      project: 'Prust Modas',
+      deadline: '6 dias para entrega',
+      amount: 'R$ 3.800,00',
+      status: 'Em andamento'
 
-    }]
+  },{
+    id: 3,
+    project: 'Onetwo Project',
+    deadline: '0 horas para entrega',
+    amount: 'R$ 2.400,00',
+    status: 'Encerrado'
+
+},{
+  id: 4,
+  project: 'Los Hermanos',
+  deadline: '12 dias para entrega',
+  amount: 'R$ 1.800,00',
+  status: 'Em andamento'
+
+},]
     }
   }
 }
