@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { FiEdit3, FiTrash } from 'react-icons/fi'
 
 import styles from './styles.module.scss'
@@ -15,6 +16,12 @@ interface JobsTableProps {
 }
 
 export function JobsTable({jobs}: JobsTableProps) {
+    const router = useRouter()
+
+    function navigateToEditJob(jobId: number) {
+        router.push(`/jobs/${jobId}`)
+    }
+
     return <div className={styles.jobsTable}>
        {jobs.map((job) => (
             <div key={job.id} className={styles.job}>
@@ -36,7 +43,7 @@ export function JobsTable({jobs}: JobsTableProps) {
                     </div>
                 </div>
                 <div className={styles.actions}>
-                    <button>
+                    <button onClick={() => navigateToEditJob(job.id)}> 
                         <FiEdit3 size={24} />
                     </button>
                     <button>

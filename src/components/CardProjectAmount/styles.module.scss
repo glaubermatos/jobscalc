@@ -1,6 +1,6 @@
 .cardWrapper {
-    max-width: 22rem;
-    height: 20.625rem;
+    // max-width: 22rem;
+    // height: 20.625rem;
     background: var(--white-500);
     border: 1px solid var(--gray-200);
     border-radius: 0.3125rem;
@@ -8,8 +8,15 @@
     
     text-align: center;
 
+    &.largeFontSize {
+        p {
+            font-size: 1.25rem;        
+            line-height: 1.875rem;
+        }
+    }
+
     p {
-        width: 15.25rem;
+        width: 16.0625rem;
         margin-top: 1.5rem;
         color: var(--gray-500);
         line-height: 1.625rem;
@@ -18,6 +25,8 @@
     strong {
         display: block;
         font-weight: 600;
+        font-size: 1.25rem;
+        line-height: 1.875rem;
     }
 
     .actions {

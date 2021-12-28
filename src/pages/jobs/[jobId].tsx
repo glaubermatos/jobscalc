@@ -1,19 +1,18 @@
 import Head from "next/head";
 import { CardProjectAmount } from "../../components/CardProjectAmount";
 import { Header } from "../../components/Header";
-import { Button } from "../../shared/Button";
 import { Input } from "../../shared/Input";
 
 import commomStyles from '../../styles/commom.module.scss'
 import styles from './styles.module.scss'
 
-export default function NewJob() {
+export default function Job() {
     return(
         <>
             <Head>
                 <title>Adicionar novo job | JobsCalc</title>
             </Head>
-            <Header title="Adicionar Novo Job" />
+            <Header title="Editar Job" />
             <main className={commomStyles.wrapper}>
                 <section className={commomStyles.container}>
                     <form action="#" className={styles.formContainer}>
@@ -31,9 +30,9 @@ export default function NewJob() {
                             </div>
                         </div>
 
-                        <CardProjectAmount>
-                            <img src="/dolar.svg" alt="dolar" />
-                            <p>Preencha os dados ao lado para ver o valor do projeto</p>
+                        <CardProjectAmount largeFontSize>
+                            <img src="/dolar2.svg" alt="dolar" />
+                            <p>O valor do projeto ficou em <strong>R$ 4,576.00 reais</strong></p>
                         </CardProjectAmount> 
                         
                     </form>

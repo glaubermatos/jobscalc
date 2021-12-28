@@ -1,14 +1,19 @@
+import { ReactNode } from 'react';
 import { FiTrash } from 'react-icons/fi'
 
 import { Button } from "../../shared/Button";
 
 import styles from './styles.module.scss'
 
-export function CardProjectAmount() {
+interface CardProjectAmountProps {
+    largeFontSize?: boolean;
+    children: ReactNode;
+}
+
+export function CardProjectAmount({children, largeFontSize = false}: CardProjectAmountProps) {
     return(
-        <aside className={styles.cardWrapper}>
-            <img src="/dolar.svg" alt="dolar" />
-            <p>Preencha os dados ao lado para ver o valor do projeto</p>
+        <aside className={`${styles.cardWrapper} ${largeFontSize ? styles.largeFontSize : null}`}>
+            {children}
             
             <div className={styles.actions}>
                 <Button color="primary">
