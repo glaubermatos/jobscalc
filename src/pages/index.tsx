@@ -8,6 +8,7 @@ import Modal from 'react-modal'
 import { ButtonNewJob } from '../components/ButtonNewJob'
 import { JobsTable } from '../components/JobsTable'
 import { ModalDeleteJob } from '../components/ModalDeleteJob'
+import { api } from '../services/api'
 
 import commomStyles from '../styles/commom.module.scss'
 import styles from './home.module.scss'
@@ -16,17 +17,24 @@ Modal.setAppElement('#root')
 
 interface Job {
   id: number;
-  project: string;
+  name: string;
   deadline: string;
   amount: string;
   status: string;
 }
 
-interface HomeProps {
-  jobs: Job[]
+interface ProfileJobs {
+  totalProjects: number;
+  totalProjectsInProgress: number;
+  totalProjectsClosed: number;
+  jobs: Job[];
 }
 
-export default function Home({jobs}: HomeProps) {
+interface HomeProps {
+  profileJobs: ProfileJobs;
+}
+
+export default function Home({profileJobs}: HomeProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   function handleOpenModalDeleteJob() {
@@ -63,15 +71,15 @@ export default function Home({jobs}: HomeProps) {
           <div className={styles.summary}>
              <div className={styles.amounts}>
                 <div>
-                  <strong>12</strong>
+                  <strong>{profileJobs.totalProjects}</strong>
                   <span>Projetos ao total</span>
                 </div>
                 <div>
-                  <strong>7</strong>
+                  <strong>{profileJobs.totalProjectsInProgress}</strong>
                   <span>Em andamento</span>
                 </div>
                 <div>
-                  <strong>4</strong>
+                  <strong>{profileJobs.totalProjectsClosed}</strong>
                   <span>Encerrados</span>
                 </div>
              </div>
@@ -82,7 +90,7 @@ export default function Home({jobs}: HomeProps) {
       <main className={styles.content}>
         <section className={commomStyles.container}>
           <JobsTable 
-            jobs={jobs}
+            jobs={profileJobs.jobs}
             onOpenModalDeleteJob={handleOpenModalDeleteJob}
           />
         </section>
@@ -94,38 +102,70 @@ export default function Home({jobs}: HomeProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const response = await api.get('/profile/1/jobs')
+
+  const jobWrapper = await response.data
+
+  const { 
+    totalProjects, 
+    totalProjectsInProgress, 
+    totalProjectsClosed, 
+    jobs 
+  } = jobWrapper;
+
+  const jobsFormated = jobs.map(job => {
+    return {
+      id: job.id,
+      name: job.name,
+      deadline: '3 dias para entrega',
+      amount: new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      }).format(job.projectValue / 100),
+      status: job.status
+    }
+  })
+
+  const profileJobs = {
+    totalProjects,
+    totalProjectsInProgress,
+    totalProjectsClosed,
+    jobs: jobsFormated
+    // [
+    //   {
+    //     id: 1,
+    //     name: 'Pizzaria Guloso',
+    //     deadline: '3 dias para entrega',
+    //     amount: 'R$ 4.500,00',
+    //     status: 'Em andamento'
+    //   },
+    //   {
+    //     id: 2,
+    //     name: 'Prust Modas',
+    //     deadline: '6 dias para entrega',
+    //     amount: 'R$ 3.800,00',
+    //     status: 'Em andamento'
+    //   },
+    //   {
+    //     id: 3,
+    //     name: 'Onetwo Project',
+    //     deadline: '0 horas para entrega',
+    //     amount: 'R$ 2.400,00',
+    //     status: 'Encerrado'
+    //   },
+    //   {
+    //     id: 4,
+    //     name: 'Los Hermanos',
+    //     deadline: '12 dias para entrega',
+    //     amount: 'R$ 1.800,00',
+    //     status: 'Em andamento'
+    //   }
+    // ]
+  }
 
   return {
     props: {
-      jobs:[{
-        id: 1,
-        project: 'Pizzaria Guloso',
-        deadline: '3 dias para entrega',
-        amount: 'R$ 4.500,00',
-        status: 'Em andamento'
-
-    },{
-      id: 2,
-      project: 'Prust Modas',
-      deadline: '6 dias para entrega',
-      amount: 'R$ 3.800,00',
-      status: 'Em andamento'
-
-  },{
-    id: 3,
-    project: 'Onetwo Project',
-    deadline: '0 horas para entrega',
-    amount: 'R$ 2.400,00',
-    status: 'Encerrado'
-
-},{
-  id: 4,
-  project: 'Los Hermanos',
-  deadline: '12 dias para entrega',
-  amount: 'R$ 1.800,00',
-  status: 'Em andamento'
-
-},]
+      profileJobs
     }
   }
 }

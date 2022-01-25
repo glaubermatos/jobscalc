@@ -5,7 +5,7 @@ import styles from './styles.module.scss'
 
 interface Job {
   id: number;
-  project: string;
+  name: string;
   deadline: string;
   amount: string;
   status: string;
@@ -28,7 +28,7 @@ export function JobsTable({jobs, onOpenModalDeleteJob}: JobsTableProps) {
             <div key={job.id} className={styles.job}>
                 <div className={styles.row}>
                     <span>{job.id}</span>
-                    <strong>{job.project}</strong>
+                    <strong>{job.name}</strong>
                 </div>
                 <div className={styles.content}>
                     <div className={styles.column}>
@@ -39,7 +39,9 @@ export function JobsTable({jobs, onOpenModalDeleteJob}: JobsTableProps) {
                         <span>Valor</span>
                         <strong>{job.amount}</strong>
                     </div>
-                    <div className={`${styles.status} ${job.status === 'Em andamento' ? (styles.inProgress) : (styles.closed)}`}>
+                    <div className={`
+                        ${styles.status} ${job.status === 'INPROGRESS' ? (styles.inProgress) : (styles.closed)}
+                    `}>
                         {job.status}
                     </div>
                 </div>
