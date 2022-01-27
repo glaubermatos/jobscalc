@@ -13,7 +13,8 @@ export function Header({title}: HeaderProps) {
         <div className={commomStyles.container}>
             <Link href={'/'}>
                 <a>
-                    <FiArrowLeft size={'1.5rem'}/>
+                    {/* <FiArrowLeft size={'1.5rem'}/> */}
+                    <img src="/arrow-left.svg" alt="back" />
                 </a>
             </Link>
             <strong>{title}</strong>

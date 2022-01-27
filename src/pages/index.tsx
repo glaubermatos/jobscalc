@@ -117,7 +117,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       id: job.id,
       name: job.name,
-      deadline: '3 dias para entrega',
+      deadline: job.deadline,
       amount: new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL'

@@ -75,9 +75,11 @@
 
     .content {
         flex: 1;
-        display: flex;
-        justify-content: flex-start;
-        gap: 3.5rem;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-rows: auto;
+        gap: 3.75rem;
+        margin-right: 6rem;
     }
 
     .column {
