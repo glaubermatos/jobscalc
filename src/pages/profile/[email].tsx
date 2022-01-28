@@ -1,13 +1,31 @@
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
 import { Header } from '../../components/Header'
+import { api } from '../../services/api'
 import { Button } from '../../shared/Button'
 import { Input } from '../../shared/Input'
 
 import commomStyles from '../../styles/commom.module.scss'
 import styles from './styles.module.scss'
 
-export default function Profile() {
+interface Profile {
+    id: number;
+    email: string;
+    name: string;
+    avatarUrl: string;
+    remuneration: number;
+    workingHoursPerDay: number;
+    workingDaysPerWeek: number;
+    vacationWeekPerYear: number;
+    valueHour: number;
+}
+
+interface ProfileProps {
+    profile: Profile;
+}
+
+export default function Profile({profile}: ProfileProps) {
     return(
         <>
             <Head>
@@ -18,8 +36,8 @@ export default function Profile() {
                 <section className={commomStyles.container}>
                     <form action="#" className={styles.formContainer}>
                         <aside className={styles.hourValueCard}>
-                            <img src="/perfil2x.png" alt="perfil" />
-                            <h2>Jaqueline</h2>
+                            <img src={profile.avatarUrl} alt="perfil" />
+                            <h2>{profile.name}</h2>
                             <p>O valor da sua hora é <strong>R$ 75,00 reais</strong>
                             </p>
                             
@@ -50,4 +68,19 @@ export default function Profile() {
             </main>
         </>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+
+    const emailProfile = params.email
+
+    const response = await api.get(`/profiles/${emailProfile}`)
+
+    const profile = await response.data
+
+    return {
+        props: {
+            profile
+        }
+    }
 }

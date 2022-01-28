@@ -45,6 +45,12 @@
         text-decoration: underline;
         color: var(--orange-500);
     }
+
+    img {
+        width: 4rem;
+        border-radius: 50%;
+        border: 2.5px solid var(--orange-500);
+    }
 }
 
 .summary {

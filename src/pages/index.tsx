@@ -15,6 +15,13 @@ import styles from './home.module.scss'
 
 Modal.setAppElement('#root')
 
+interface Profile {
+  id: number;
+	email: string;
+	name: string;
+	avatarUrl: string;
+}
+
 interface Job {
   id: number;
   name: string;
@@ -31,10 +38,11 @@ interface ProfileJobs {
 }
 
 interface HomeProps {
+  profile: Profile;
   profileJobs: ProfileJobs;
 }
 
-export default function Home({profileJobs}: HomeProps) {
+export default function Home({profile, profileJobs}: HomeProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   function handleOpenModalDeleteJob() {
@@ -58,13 +66,13 @@ export default function Home({profileJobs}: HomeProps) {
               <img src="/alert-octagon.svg" alt="alert" />
               Você tem 2 horas livres no seu dia
             </span>
-            <Link href={'/profile/me'}>
+            <Link href={`/profile/${profile.email}`}>
               <a className={styles.perfil}>
                 <div>
-                  <strong>Jaqueline</strong>
+                  <strong>{profile.name}</strong>
                   <span>Ver perfil</span>
                 </div>
-                <img src="/perfil.png" alt="perfil" />
+                <img src={profile.avatarUrl} alt={`Foto de perfil de ${profile.name}`} />
               </a>
             </Link>
           </div>
@@ -102,9 +110,13 @@ export default function Home({profileJobs}: HomeProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const response = await api.get('/profile/1/jobs')
+  const responseProfile = await api.get(`/profiles/glaub.oliveira@hotmail.com`);
+  const responseJobs = await api.get('/profiles/1/jobs')
 
-  const jobWrapper = await response.data
+  const profile = await responseProfile.data
+  const jobWrapper = await responseJobs.data
+
+  console.log(profile)
 
   const { 
     totalProjects, 
@@ -165,6 +177,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
+      profile,
       profileJobs
     }
   }
