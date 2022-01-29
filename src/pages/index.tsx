@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import Modal from 'react-modal'
 
@@ -42,15 +42,32 @@ interface HomeProps {
   profileJobs: ProfileJobs;
 }
 
-export default function Home({profile, profileJobs}: HomeProps) {
+export default function Home(props: HomeProps) {
+  const profile = props.profile
+  const [profileJobs, setProfileJobs] = useState(props.profileJobs)
+  
   const [isOpen, setIsOpen] = useState(false)
+  const [jobForDeletion, setJobForDeletion] = useState<Job>(null)
 
-  function handleOpenModalDeleteJob() {
+  function handleOpenModalDeleteJob(job: Job) {
     setIsOpen(true)
+    setJobForDeletion(job)
   }
 
   function handleCloseModalDeleteJob() {
     setIsOpen(false)
+  }
+
+  async function handleDeleteJob(job: Job) {
+    const response = await api.delete(`/profiles/${profile.id}/jobs/${job.id}`)
+
+    if (response.status === 204) {
+      alert('Job excluído com sucesso.')
+      
+      const response = await api.get(`/profiles/${profile.id}/jobs`)
+
+      setProfileJobs(response.data)
+    }
   }
 
   return (
@@ -98,13 +115,19 @@ export default function Home({profile, profileJobs}: HomeProps) {
       <main className={styles.content}>
         <section className={commomStyles.container}>
           <JobsTable 
+            profileId={profile.id}
             jobs={profileJobs.jobs}
             onOpenModalDeleteJob={handleOpenModalDeleteJob}
           />
         </section>
       </main>
       
-      <ModalDeleteJob isOpen={isOpen} onRequestClose={handleCloseModalDeleteJob} />
+      <ModalDeleteJob 
+        isOpen={isOpen} 
+        onRequestClose={handleCloseModalDeleteJob}
+        jobForDeletion={jobForDeletion}
+        onDeleteJob={handleDeleteJob}
+      />
     </>
   )
 }

@@ -48,6 +48,8 @@
 
     img {
         width: 4rem;
+        max-width: 4rem;
+        max-height: 4rem;
         border-radius: 50%;
         border: 2.5px solid var(--orange-500);
     }
