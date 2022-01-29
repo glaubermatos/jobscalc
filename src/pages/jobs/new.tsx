@@ -44,6 +44,7 @@ export default function NewJob({profile}: NewJobProps) {
         try {
             await api.post(`/profiles/${profile.id}/jobs`, job)
             router.push('/')
+            alert('Job criado com sucesso')
         } catch(error) {
             console.log(error)
         }

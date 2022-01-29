@@ -47,7 +47,7 @@ export default function Home(props: HomeProps) {
   const [profileJobs, setProfileJobs] = useState(props.profileJobs)
   
   const [isOpen, setIsOpen] = useState(false)
-  const [jobForDeletion, setJobForDeletion] = useState<Job>(null)
+  const [jobForDeletion, setJobForDeletion] = useState<Job>({} as Job)
 
   function handleOpenModalDeleteJob(job: Job) {
     setIsOpen(true)
@@ -66,7 +66,23 @@ export default function Home(props: HomeProps) {
       
       const response = await api.get(`/profiles/${profile.id}/jobs`)
 
-      setProfileJobs(response.data)
+      const jobsFormated = response.data.jobs.map((job) => {
+        return {
+          id: job.id,
+          name: job.name,
+          deadline: job.deadline,
+          amount: new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+          }).format(job.projectValue / 100),
+          status: job.status
+        }
+      })
+
+      setProfileJobs({
+        ...response.data,
+        jobs: jobsFormated
+      })
     }
   }
 

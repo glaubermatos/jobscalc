@@ -49,17 +49,17 @@ export default function Profile({profile}: ProfileProps) {
                             <div className={styles.fieldGroup}>
                                 <h3>Dados do perfil</h3>
                                 <div className={styles.row}>
-                                    <Input placeholder='Nome' value={profile.name} />
-                                    <Input placeholder='Link da foto' value={profile.avatarUrl} />
+                                    <Input placeholder='Nome' defaultValue={profile.name} />
+                                    <Input placeholder='Link da foto' defaultValue={profile.avatarUrl} />
                                 </div>
                             </div>
                             <div className={styles.fieldGroup}> 
                                 <h3>Planejamento</h3>
                                 <div className={styles.row}>
-                                    <Input label='Quanto eu quero ganhar por mês?' placeholder='R$' value={profile.remuneration} />
-                                    <Input label='Quantas horas quero trabalhar por dia?' value={profile.workingHoursPerDay} />
-                                    <Input label='Quantos dias quero trabalhar por semana?' value={profile.workingDaysPerWeek} />
-                                    <Input label='Quantas semanas por ano você quer tirar férias?' value={profile.vacationWeekPerYear} />
+                                    <Input label='Quanto eu quero ganhar por mês?' placeholder='R$' defaultValue={profile.remuneration} />
+                                    <Input label='Quantas horas quero trabalhar por dia?' defaultValue={profile.workingHoursPerDay} />
+                                    <Input label='Quantos dias quero trabalhar por semana?' defaultValue={profile.workingDaysPerWeek} />
+                                    <Input label='Quantas semanas por ano você quer tirar férias?' defaultValue={profile.vacationWeekPerYear} />
                                 </div>
                             </div>
                         </div>
