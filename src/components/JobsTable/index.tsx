@@ -8,7 +8,7 @@ interface Job {
   name: string;
   deadline: string;
   amount: string;
-  status: string;
+  status: string /* 'NOTSTARTED' | 'INPROGRESS' | 'CLOSED' */;
 }
 
 interface JobsTableProps {
@@ -40,11 +40,22 @@ export function JobsTable({profileId, jobs, onOpenModalDeleteJob}: JobsTableProp
                         <span>Valor</span>
                         <strong>{job.amount}</strong>
                     </div>
-                    <div className={`
-                        ${styles.status} ${job.status === 'INPROGRESS' ? (styles.inProgress) : (styles.closed)}
-                    `}>
-                        {job.status}
+                    <div>
+                        <div className={`
+                            ${styles.status} ${job.status === 'INPROGRESS' ? (
+                                styles.inProgress
+                            ) : (job.status === 'CLOSED' ? (styles.closed) : (styles.notStarted))}
+                        `}>
+                            {job.status === 'INPROGRESS' ? (
+                                'Em andamento'
+                            ) : (
+                                job.status === 'CLOSED' ? ('Encerrado') : ('Não iniciado')
+                            )}                            
+                        </div>
                     </div>
+
+
+                    
                 </div>
                 <div className={styles.actions}>
                     <button onClick={() => navigateToEditJob(job.id)}> 
