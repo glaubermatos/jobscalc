@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { CardProjectAmount } from "../../components/CardProjectAmount";
 import { Header } from "../../components/Header";
+import { StatusJob } from "../../components/StatusJob";
 import { api } from "../../services/api";
 import { Input } from "../../shared/Input";
 
@@ -50,6 +51,7 @@ export default function Job(props: JobProps) {
                         <div className={styles.jobsData}>
                             <div className={styles.fieldGroup}>
                                 <h3>Dados do Job</h3>
+                                <StatusJob />
                                 <div className={styles.row}>
                                     <Input
                                         label='Nome do Job' 

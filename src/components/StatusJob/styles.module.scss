@@ -1,0 +1,72 @@
+.statusJob {
+
+    label {
+        display: block;
+        color: var(--gray-400);
+    }
+
+    .container {
+        margin-top: 1rem;
+        background: var(--white-500);
+        padding: 0.5rem;
+        // border-radius: 0.3125rem;
+        border-radius: 50px;
+        border: 1px solid var(--gray-200);
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+
+        button {
+            height: 3rem;
+            // border-radius: 0.3125rem;
+            border-radius: 3rem;
+            background: inherit;
+
+            font: 500 0.875rem 'Inter', sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border: 0;
+
+            &.notStarted {
+                color: var(--blue-500);
+
+                &.active {
+                    background: var(--blue-50);
+                    border: 1px solid var(--blue-500);
+                }
+
+                &:hover {
+                    border: 1px solid var(--blue-500);
+                }
+            }
+            &.inProgress {
+                color: var(--green-500);
+
+                &.active {
+                    background: var(--green-50);
+                    border: 1px solid var(--green-500);
+                }
+
+                &:hover {
+                    border: 1px solid var(--green-500);
+                }   
+            }
+            &.closed {
+                color: var(--red-500);
+
+                &.active {
+                    background: var(--red-50);
+                    border: 1px solid var(--red-500);
+                }
+
+                &:hover {
+                    border: 1px solid var(--red-500);
+                }
+            }
+        }
+    }
+}

@@ -95,10 +95,10 @@ export default function Home(props: HomeProps) {
         <div className={commomStyles.container}>
           <div className={styles.menu}>
             <img src="/logo.svg" alt="logo" />
-            <span>
+            {/* <span>
               <img src="/alert-octagon.svg" alt="alert" />
               Você tem 2 horas livres no seu dia
-            </span>
+            </span> */}
             <Link href={`/profile/${profile.email}`}>
               <a className={styles.perfil}>
                 <div>
