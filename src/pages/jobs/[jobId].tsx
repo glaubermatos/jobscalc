@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
 import { CardProjectAmount } from "../../components/CardProjectAmount";
 import { Header } from "../../components/Header";
+import { ModalDeleteJob } from "../../components/ModalDeleteJob";
 import { StatusJob } from "../../components/StatusJob";
 import { api } from "../../services/api";
 import { Input } from "../../shared/Input";
@@ -33,6 +34,8 @@ interface JobProps {
 
 export default function Job(props: JobProps) {
     const router = useRouter()    
+
+    const [isModalDeleteJobOpen, setIsModalDeleteJobOpen] = useState(false)
 
     const [job, setJob] = useState(props.job)
 
@@ -75,6 +78,23 @@ export default function Job(props: JobProps) {
 
         createNewJob(newJob)
     }
+
+    function handleOpenModalDeleteJob() {
+        setIsModalDeleteJobOpen(true)
+      }
+    
+      function handleCloseModalDeleteJob() {
+        setIsModalDeleteJobOpen(false)
+      }
+
+      async function handleDeleteJob() {
+        const response = await api.delete(`/profiles/${props.profile.id}/jobs/${job.id}`)
+    
+        if (response.status === 204) {
+          alert('Job excluído com sucesso.')
+          router.push('/')
+        }
+      }
 
     return(
         <>
@@ -120,7 +140,10 @@ export default function Job(props: JobProps) {
                             </div>
                         </div>
 
-                        <CardProjectAmount largeFontSize>
+                        <CardProjectAmount
+                            largeFontSize 
+                            onOpenModalDeleteJob={handleOpenModalDeleteJob}
+                        >
                             <img src="/dolar2.svg" alt="dolar" />
                             <p>O valor do projeto ficou em <strong>{new Intl.NumberFormat('pt-BR', {
                                 style: 'currency',
@@ -131,6 +154,13 @@ export default function Job(props: JobProps) {
                     </form>
                 </section>
             </main>
+
+            <ModalDeleteJob 
+                isOpen={isModalDeleteJobOpen} 
+                onRequestClose={handleCloseModalDeleteJob}
+                jobForDeletion={{id: job.id, name: job.name}}
+                onDeleteJob={handleDeleteJob}
+            />
         </>
     )
 }

@@ -37,6 +37,11 @@ interface ProfileJobs {
   jobs: Job[];
 }
 
+interface JobForDeletion {
+  id: number, 
+  name: string
+}
+
 interface HomeProps {
   profile: Profile;
   profileJobs: ProfileJobs;
@@ -47,7 +52,8 @@ export default function Home(props: HomeProps) {
   const [profileJobs, setProfileJobs] = useState(props.profileJobs)
   
   const [isOpen, setIsOpen] = useState(false)
-  const [jobForDeletion, setJobForDeletion] = useState<Job>({} as Job)
+  
+  const [jobForDeletion, setJobForDeletion] = useState<JobForDeletion>({} as JobForDeletion)
 
   function handleOpenModalDeleteJob(job: Job) {
     setIsOpen(true)
