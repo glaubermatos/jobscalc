@@ -64,12 +64,17 @@
         display: flex;
         align-items: center;
         gap: 2rem;
+        margin-right: 1rem;
 
         strong {
             color: var(--gray-500);
             font-weight: 600;
             font-size: 1.5rem;
             line-height: 2.125rem;
+
+            white-space: nowrap;// não quebra a linha
+            overflow: hidden; //esconde o conteúdo que extrapola os limites
+            text-overflow: ellipsis; //mostra os três pontinhos quando o texto extrapolar os limites
         }
     }
 
@@ -79,7 +84,7 @@
         grid-template-columns: 2fr 1fr 2fr;
         grid-template-rows: auto;
         gap: 2rem;
-        margin-right: 6rem;
+        margin-right: 5.25rem;
     }
 
     .column {
