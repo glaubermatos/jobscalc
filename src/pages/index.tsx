@@ -5,6 +5,8 @@ import { useState } from 'react'
 
 import Modal from 'react-modal'
 
+import { formatPrice } from '../utils/format'
+
 import { ButtonNewJob } from '../components/ButtonNewJob'
 import { JobsTable } from '../components/JobsTable'
 import { ModalDeleteJob } from '../components/ModalDeleteJob'
@@ -74,14 +76,9 @@ export default function Home(props: HomeProps) {
 
       const jobsFormated = response.data.jobs.map((job) => {
         return {
-          id: job.id,
-          name: job.name,
+          ...job,
           deadline: job.deadline,
-          amount: new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-          }).format(job.projectValue / 100),
-          status: job.status
+          amount: formatPrice(job.projectValue / 100),
         }
       })
 
@@ -175,10 +172,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       id: job.id,
       name: job.name,
       deadline: job.deadline,
-      amount: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      }).format(job.projectValue / 100),
+      amount: formatPrice(job.projectValue / 100),
       status: job.status
     }
   })
@@ -188,36 +182,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     totalProjectsInProgress,
     totalProjectsClosed,
     jobs: jobsFormated
-    // [
-    //   {
-    //     id: 1,
-    //     name: 'Pizzaria Guloso',
-    //     deadline: '3 dias para entrega',
-    //     amount: 'R$ 4.500,00',
-    //     status: 'Em andamento'
-    //   },
-    //   {
-    //     id: 2,
-    //     name: 'Prust Modas',
-    //     deadline: '6 dias para entrega',
-    //     amount: 'R$ 3.800,00',
-    //     status: 'Em andamento'
-    //   },
-    //   {
-    //     id: 3,
-    //     name: 'Onetwo Project',
-    //     deadline: '0 horas para entrega',
-    //     amount: 'R$ 2.400,00',
-    //     status: 'Encerrado'
-    //   },
-    //   {
-    //     id: 4,
-    //     name: 'Los Hermanos',
-    //     deadline: '12 dias para entrega',
-    //     amount: 'R$ 1.800,00',
-    //     status: 'Em andamento'
-    //   }
-    // ]
   }
 
   return {

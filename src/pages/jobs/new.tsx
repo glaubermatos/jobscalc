@@ -10,6 +10,7 @@ import { Input } from "../../shared/Input";
 
 import commomStyles from '../../styles/commom.module.scss'
 import styles from './styles.module.scss'
+import { formatPrice } from "../../utils/format";
 
 interface Job {
     name: string;
@@ -40,14 +41,19 @@ export default function NewJob({profile}: NewJobProps) {
     // verificar a quantidade de horas de trabalho por dia do perfil bate 
     // com a quantidade de horas dedicada ao job
 
-    async function createNewJob(job: Job) {
-        try {
-            await api.post(`/profiles/${profile.id}/jobs`, job)
-            router.push('/')
-            alert('Job criado com sucesso')
-        } catch(error) {
-            console.log(error)
-        }
+    function createNewJob(job: Job) {
+        api.post(`/profiles/${profile.id}/jobs`, job)
+            .then(response => {
+                alert('Job criado com sucesso')
+                router.push('/')
+            })
+            .catch(error => {
+                const { data } = error.response
+                const problem = data
+
+                alert(`Ops! ${problem.title}`)
+            })
+          
     }
 
     function handleSubmit(event: FormEvent) {
@@ -111,7 +117,7 @@ export default function NewJob({profile}: NewJobProps) {
                         {projectValue ? (
                             <CardProjectAmount largeFontSize>
                                 <img src="/dolar2.svg" alt="dolar" />
-                                <p>O valor do projeto ficou em <strong>R$ {projectValue/100} reais</strong></p>
+                                <p>O valor do projeto ficou em <strong>{formatPrice(projectValue/100)} reais</strong></p>
                             </CardProjectAmount> 
                         ) : (
                             <CardProjectAmount>

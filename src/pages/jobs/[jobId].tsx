@@ -2,12 +2,15 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
+import { formatPrice } from "../../utils/format";
+
 import { CardProjectAmount } from "../../components/CardProjectAmount";
 import { Header } from "../../components/Header";
 import { ModalDeleteJob } from "../../components/ModalDeleteJob";
 import { StatusJob } from "../../components/StatusJob";
-import { api } from "../../services/api";
 import { Input } from "../../shared/Input";
+
+import { api } from "../../services/api";
 
 import commomStyles from '../../styles/commom.module.scss'
 import styles from './styles.module.scss'
@@ -145,10 +148,7 @@ export default function Job(props: JobProps) {
                             onOpenModalDeleteJob={handleOpenModalDeleteJob}
                         >
                             <img src="/dolar2.svg" alt="dolar" />
-                            <p>O valor do projeto ficou em <strong>{new Intl.NumberFormat('pt-BR', {
-                                style: 'currency',
-                                currency: 'BRL'
-                            }).format(projectValue / 100)} reais</strong></p>
+                            <p>O valor do projeto ficou em <strong>{formatPrice(projectValue / 100)} reais</strong></p>
                         </CardProjectAmount> 
                         
                     </form>
