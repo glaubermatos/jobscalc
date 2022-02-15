@@ -49,8 +49,8 @@ export default function Profile({profile}: ProfileProps) {
                             <div className={styles.fieldGroup}>
                                 <h3>Dados do perfil</h3>
                                 <div className={styles.row}>
-                                    <Input placeholder='Nome' defaultValue={profile.name} />
-                                    <Input placeholder='Link da foto' defaultValue={profile.avatarUrl} />
+                                    <Input readOnly disabled placeholder='Nome' defaultValue={profile.name} />
+                                    <Input readOnly disabled placeholder='Link da foto' defaultValue={profile.avatarUrl} />
                                 </div>
                             </div>
                             <div className={styles.fieldGroup}> 

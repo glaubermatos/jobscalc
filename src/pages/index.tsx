@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
+import { getSession } from 'next-auth/react'
 import { useState } from 'react'
 
 import Modal from 'react-modal'
@@ -10,6 +11,7 @@ import { formatPrice } from '../utils/format'
 import { ButtonNewJob } from '../components/ButtonNewJob'
 import { JobsTable } from '../components/JobsTable'
 import { ModalDeleteJob } from '../components/ModalDeleteJob'
+import { SignInButton } from '../components/SignInButton'
 import { api } from '../services/api'
 
 import commomStyles from '../styles/commom.module.scss'
@@ -102,6 +104,7 @@ export default function Home(props: HomeProps) {
               <img src="/alert-octagon.svg" alt="alert" />
               Você tem 2 horas livres no seu dia
             </span> */}
+            <SignInButton />
             <Link href={`/profile/${profile.email}`}>
               <a className={styles.perfil}>
                 <div>
@@ -118,6 +121,10 @@ export default function Home(props: HomeProps) {
                   <strong>{profileJobs.totalProjects}</strong>
                   <span>Projetos ao total</span>
                 </div>
+                {/* <div>
+                  <strong>1</strong>
+                  <span>Não iniciados</span>
+                </div> */}
                 <div>
                   <strong>{profileJobs.totalProjectsInProgress}</strong>
                   <span>Em andamento</span>
@@ -151,9 +158,15 @@ export default function Home(props: HomeProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async ({req}) => {
   const responseProfile = await api.get(`/profiles/glaub.oliveira@hotmail.com`);
   const responseJobs = await api.get('/profiles/1/jobs')
+
+  const session = await getSession({req})
+
+  if (session) {
+    console.log(session.user)
+  }
 
   const profile = await responseProfile.data
   const jobWrapper = await responseJobs.data

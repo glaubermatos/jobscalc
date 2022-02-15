@@ -48,8 +48,9 @@ a {
 button {
     cursor: pointer;
     font: 700 0.875rem 'IBM Plex Sans', sans-serif;
+}
 
-    &:disabled {
-        cursor: not-allowed;
-    }
+[disabled] {
+    opacity: 0.8;
+    cursor: not-allowed;
 }
