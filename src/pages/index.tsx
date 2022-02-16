@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { getSession } from 'next-auth/react'
+import { getSession, signOut } from 'next-auth/react'
 import { useState } from 'react'
 
 import Modal from 'react-modal'
@@ -11,8 +11,8 @@ import { formatPrice } from '../utils/format'
 import { ButtonNewJob } from '../components/ButtonNewJob'
 import { JobsTable } from '../components/JobsTable'
 import { ModalDeleteJob } from '../components/ModalDeleteJob'
-import { SignInButton } from '../components/SignInButton'
 import { api } from '../services/api'
+import { Profile } from '../components/Profile'
 
 import commomStyles from '../styles/commom.module.scss'
 import styles from './home.module.scss'
@@ -104,8 +104,7 @@ export default function Home(props: HomeProps) {
               <img src="/alert-octagon.svg" alt="alert" />
               Você tem 2 horas livres no seu dia
             </span> */}
-            <SignInButton />
-            <Link href={`/profile/${profile.email}`}>
+            {/* <Link href={`/profile/${profile.email}`}>
               <a className={styles.perfil}>
                 <div>
                   <strong>{profile.name}</strong>
@@ -113,7 +112,8 @@ export default function Home(props: HomeProps) {
                 </div>
                 <img src={profile.avatarUrl} alt={`Foto de perfil de ${profile.name}`} />
               </a>
-            </Link>
+            </Link> */}
+            <Profile profile={{email: profile.email, name: profile.name, avatarUrl: profile.avatarUrl}} />
           </div>
           <div className={styles.summary}>
              <div className={styles.amounts}>
@@ -164,8 +164,13 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
 
   const session = await getSession({req})
 
-  if (session) {
-    console.log(session.user)
+  if (!session?.user) {
+    return {
+      redirect: {
+        destination: '/signin',
+        permanent: false
+      }
+    }
   }
 
   const profile = await responseProfile.data
