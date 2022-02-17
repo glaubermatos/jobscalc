@@ -1,10 +1,29 @@
 import { GetServerSideProps } from "next";
+import Head from "next/head";
+
 import { getSession } from "next-auth/react";
+
 import { SignInButton } from "../../components/SignInButton";
 
-export default function index() {
+import styles from './styles.module.scss'
+
+export default function SignIn() {
     return (
-        <SignInButton />
+        <>
+            <Head>
+                <title>Sign In with Github | JobsCalc</title>
+            </Head>
+            <main className={styles.main}>
+                <div className={styles.imagem}></div>
+                <div className={styles.content}>
+                    <div className={styles.signin}>
+                        <img src="logo.svg" alt="" />
+                        <p>Gerêncie seus jobs de forma simples e fácil</p>
+                        <SignInButton />
+                    </div>
+                </div>
+            </main>
+        </>
     )
 }
 

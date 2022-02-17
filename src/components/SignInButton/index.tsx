@@ -1,11 +1,17 @@
 import { signIn } from "next-auth/react"
 
+import { FaGithub } from 'react-icons/fa'
+
+import styles from './styles.module.scss'
+
 export function SignInButton() {
-  
   return (
-    <>
-      Usuario nao autenticado <br />
-      <button onClick={() => signIn()}>Entrar com seu Github</button>
-    </>
+      <button 
+        className={styles.signinButton}
+        onClick={() => signIn()}
+      >
+        <FaGithub size={'1.5rem'} />
+        Entrar com Github
+      </button>
   )
 }

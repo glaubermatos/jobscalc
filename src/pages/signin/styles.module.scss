@@ -1,0 +1,49 @@
+.main {
+    display: flex;
+    align-items: stretch;
+}
+
+.imagem {
+    flex: 7;
+
+    background: url("../../../public/image.png") no-repeat, linear-gradient(140.7deg, rgba(240, 242, 245, 0) -6.15%, #F0F2F5 119.28%);
+    background-size: cover;
+
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(140.7deg, rgba(240, 242, 245, 0) -6.15%, #F0F2F5 119.28%);
+    }
+}
+
+.content {
+    flex: 5;
+
+    height: 100vh;
+    background: var(--brown-500);
+
+    display: flex;
+    align-items: center;
+}
+
+.signin {
+    margin-left: 6rem;
+    width: 22rem;
+
+    img {
+        margin-bottom: 3rem;
+    }
+
+    p {
+        margin-bottom: 2rem;
+        max-width: 13.75rem;
+        color: var(--white-500);
+        line-height: 1.625rem;
+    }
+}
