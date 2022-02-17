@@ -3,6 +3,7 @@ import { signOut } from 'next-auth/react'
 import { FiLogOut } from 'react-icons/fi'
 
 import styles from './styles.module.scss'
+
 import { FormEvent } from 'react'
 
 interface Profile {
@@ -37,7 +38,7 @@ export function Profile({profile}: ProfileProps) {
                 type="button"
                 onClick={handleSignOut}    
             >
-                <FiLogOut />
+                <FiLogOut size={24} />
                 Sair
             </button>
         </nav>
