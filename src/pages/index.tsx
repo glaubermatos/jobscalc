@@ -159,11 +159,9 @@ export default function Home(props: HomeProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({req}) => {
-  const responseProfile = await api.get(`/profiles/glaub.oliveira@hotmail.com`);
-  const responseJobs = await api.get('/profiles/1/jobs')
-
+  
   const session = await getSession({req})
-
+  
   if (!session?.user) {
     return {
       redirect: {
@@ -172,6 +170,33 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
       }
     }
   }
+
+  let responseProfile
+  
+  try {
+    responseProfile = await api.get(`/profiles/${session.user.email}`);
+
+  } catch (error) {
+    return {
+      redirect: {
+        destination: '/profile/me',
+        permanent: false,
+      }
+    }
+  }
+  
+  // const responseProfile = await api.get(`/profiles/${session.user.email}`);
+
+  // if (!responseProfile?.data) {
+  //   return {
+  //     redirect: {
+  //       destination: '/profile/me',
+  //       permanent: false,
+  //     }
+  //   }
+  // }
+
+  const responseJobs = await api.get('/profiles/1/jobs')
 
   const profile = await responseProfile.data
   const jobWrapper = await responseJobs.data
