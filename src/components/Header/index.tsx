@@ -1,3 +1,4 @@
+import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { FiArrowLeft } from 'react-icons/fi'
 
@@ -9,14 +10,28 @@ interface HeaderProps {
 }
 
 export function Header({title}: HeaderProps) {
+    const session = useSession()    
+
+    let activeProfile
+
+    if (session.data)
+        activeProfile = session?.data.activeProfile
+
     return <header className={styles.header}>
         <div className={commomStyles.container}>
-            <Link href={'/'}>
-                <a>
-                    {/* <FiArrowLeft size={'1.5rem'}/> */}
+            {activeProfile != null ? (
+                <Link href={'/'}>
+                    <a>
+                        {/* <FiArrowLeft size={'1.5rem'}/> */}
+                        <img src="/arrow-left.svg" alt="back" />
+                    </a>
+                </Link>
+            ) : (
+                <button onClick={() => signOut()}>
                     <img src="/arrow-left.svg" alt="back" />
-                </a>
-            </Link>
+                    Cancelar
+                </button>
+            )}
             <strong>{title}</strong>
         </div>
     </header>

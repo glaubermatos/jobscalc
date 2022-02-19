@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next"
-import { getSession } from "next-auth/react"
+import { getSession, useSession } from "next-auth/react"
 import Head from "next/head"
+import { useState } from "react"
 
 import { Header } from "../../components/Header"
 import { api } from "../../services/api"
@@ -16,36 +17,49 @@ interface NewProfile {
     avatarUrl: string;
 }
 
-interface Profile {
-    id: number;
+export interface Profile {
+    id?: number;
     email: string;
     name: string;
     avatarUrl: string;
-    remuneration: number;
-    workingHoursPerDay: number;
-    workingDaysPerWeek: number;
-    vacationWeekPerYear: number;
-    valueHour: number;
+    remuneration?: number;
+    workingHoursPerDay?: number;
+    workingDaysPerWeek?: number;
+    vacationWeekPerYear?: number;
+    valueHour?: number;
 }
 
 interface ProfileProps {
-    profile: Profile | NewProfile;
+    profile: Profile;
 }
 
 export default function Profile2({ profile }: ProfileProps) {
+    const session = useSession()
+
+    let activeProfile: Profile
+
+    if (session.data)
+        activeProfile = session?.data.activeProfile
+
+    const [remuneration, setRemuneration] = useState(profile.remuneration)
+    const [workingHoursPerDay, setWorkingHoursPerDay] = useState(profile.workingHoursPerDay)
+    const [workingDaysPerWeek, setWorkingDaysPerWeek] = useState(profile.workingDaysPerWeek)
+    const [vacationWeekPerYear, setVacationWeekPerYear] = useState(profile.vacationWeekPerYear)
+    const [valueHour, setValueHour] = useState(profile.valueHour | 0)
+
     return (
         <>
             <Head>
-                <title>Profile | JobsCalc</title>
+                <title>{activeProfile != null ? 'Profile | JobsCalc' : 'Create new profile | JobsCalc'}</title>
             </Head>
-            <Header title='Meu perfil' />
+            <Header title={activeProfile != null ? 'Meu perfil' : 'Crie seu perfil'} />
             <main className={commomStyles.wrapper}>
                 <section className={commomStyles.container}>
                     <form action="#" className={styles.formContainer}>
                         <aside className={styles.hourValueCard}>
                             <img src={profile.avatarUrl} alt="perfil" />
                             <h2>{profile.name}</h2>
-                            <p>O valor da sua hora é <strong>R$ {20.00} reais</strong>
+                            <p>O valor da sua hora é <strong>R$ {valueHour} reais</strong>
                             </p>
                             
                             <Button color='primary'>
@@ -63,10 +77,10 @@ export default function Profile2({ profile }: ProfileProps) {
                             <div className={styles.fieldGroup}> 
                                 <h3>Planejamento</h3>
                                 <div className={styles.row}>
-                                    <Input label='Quanto eu quero ganhar por mês?' placeholder='R$' defaultValue={4000} />
-                                    <Input label='Quantas horas quero trabalhar por dia?' defaultValue={2} />
-                                    <Input label='Quantos dias quero trabalhar por semana?' defaultValue={4} />
-                                    <Input label='Quantas semanas por ano você quer tirar férias?' defaultValue={4} />
+                                    <Input label='Quanto eu quero ganhar por mês?' placeholder='R$' defaultValue={remuneration} />
+                                    <Input label='Quantas horas quero trabalhar por dia?' defaultValue={workingHoursPerDay} />
+                                    <Input label='Quantos dias quero trabalhar por semana?' defaultValue={workingDaysPerWeek} />
+                                    <Input label='Quantas semanas por ano você quer tirar férias?' defaultValue={vacationWeekPerYear} />
                                 </div>
                             </div>
                         </div>
@@ -90,10 +104,8 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
         }
     }
 
-    if (session.isWithProfileActive) {
-        const response = await api.get(`/profiles/${session.user.email}`)
-
-        const profile = await response.data
+    if (session.activeProfile) {
+        const profile = session.activeProfile
     
         const profileFormated = {
             ...profile,

@@ -171,37 +171,18 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
     }
   }
 
-  let responseProfile
-  
-  try {
-    responseProfile = await api.get(`/profiles/${session.user.email}`);
-
-  } catch (error) {
+  if (!session.activeProfile) {
     return {
       redirect: {
-        destination: '/profile/me',
+        destination: '/profile/me',// pode ser criado uma rota especifica para criação de novos perfis de usuário
         permanent: false,
       }
     }
   }
-  
-  // const responseProfile = await api.get(`/profiles/${session.user.email}`);
 
-  // if (!responseProfile?.data) {
-  //   return {
-  //     redirect: {
-  //       destination: '/profile/me',
-  //       permanent: false,
-  //     }
-  //   }
-  // }
+  const responseJobs = await api.get(`/profiles/${session.activeProfile.id}/jobs`)
 
-  const responseJobs = await api.get('/profiles/1/jobs')
-
-  const profile = await responseProfile.data
   const jobWrapper = await responseJobs.data
-
-  console.log(profile)
 
   const { 
     totalProjects, 
@@ -229,7 +210,7 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
 
   return {
     props: {
-      profile,
+      profile: session.activeProfile,
       profileJobs
     }
   }
