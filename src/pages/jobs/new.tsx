@@ -1,16 +1,18 @@
+import { FormEvent, useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from 'next/router'
 import Head from "next/head";
-import { FormEvent, useEffect, useState } from "react";
+
+import { formatPrice } from "../../utils/format";
+
 import { CardProjectAmount } from "../../components/CardProjectAmount";
 import { Header } from "../../components/Header";
 import { api } from "../../services/api";
-import { Button } from "../../shared/Button";
 import { Input } from "../../shared/Input";
 
 import commomStyles from '../../styles/commom.module.scss'
 import styles from './styles.module.scss'
-import { formatPrice } from "../../utils/format";
+import { getSession } from "next-auth/react";
 
 interface Job {
     name: string;
@@ -133,16 +135,25 @@ export default function NewJob({profile}: NewJobProps) {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({req}) => {
+
+    const session = await getSession({req})
+
+    if (!session?.user) {
+        return {
+            redirect: {
+                destination: '/singnin',
+                permanent: false
+            }
+        }
+    }
     
-    const responseProfile = await api.get<Profile>(`/profiles/glaub.oliveira@hotmail.com`)
-    
-    const profileResponse = responseProfile.data
+    const profileActive = session.activeProfile
 
     const profile = {
-        id: profileResponse.id,
-        workingHoursPerDay: profileResponse.workingHoursPerDay,
-        valueHour: profileResponse.valueHour
+        id: profileActive.id,
+        workingHoursPerDay: profileActive.workingHoursPerDay,
+        valueHour: profileActive.valueHour
     }
 
     return {

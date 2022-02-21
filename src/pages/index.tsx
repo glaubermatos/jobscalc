@@ -1,15 +1,14 @@
 import { GetServerSideProps } from 'next'
-import Head from 'next/head'
-import Link from 'next/link'
-import { getSession, signOut } from 'next-auth/react'
 import { useState } from 'react'
+import { getSession } from 'next-auth/react'
+import Head from 'next/head'
 
+import { api } from '../services/api'
 import { formatPrice } from '../utils/format'
 
 import { ButtonNewJob } from '../components/ButtonNewJob'
 import { JobsTable } from '../components/JobsTable'
 import { ModalDeleteJob } from '../components/ModalDeleteJob'
-import { api } from '../services/api'
 import { Profile } from '../components/Profile'
 
 import commomStyles from '../styles/commom.module.scss'
@@ -100,27 +99,19 @@ export default function Home(props: HomeProps) {
               <img src="/alert-octagon.svg" alt="alert" />
               Você tem 2 horas livres no seu dia
             </span> */}
-            {/* <Link href={`/profile/${profile.email}`}>
-              <a className={styles.perfil}>
-                <div>
-                  <strong>{profile.name}</strong>
-                  <span>Ver perfil</span>
-                </div>
-                <img src={profile.avatarUrl} alt={`Foto de perfil de ${profile.name}`} />
-              </a>
-            </Link> */}
-            <Profile profile={{email: profile.email, name: profile.name, avatarUrl: profile.avatarUrl}} />
+            <Profile
+            profile={{
+              email: profile.email, 
+              name: profile.name, 
+              avatarUrl: profile.avatarUrl
+            }} />
           </div>
           <div className={styles.summary}>
              <div className={styles.amounts}>
                 <div>
                   <strong>{profileJobs.totalProjects}</strong>
                   <span>Projetos ao total</span>
-                </div>
-                {/* <div>
-                  <strong>1</strong>
-                  <span>Não iniciados</span>
-                </div> */}
+                </div>                
                 <div>
                   <strong>{profileJobs.totalProjectsInProgress}</strong>
                   <span>Em andamento</span>

@@ -4,13 +4,14 @@ import Head from "next/head"
 import { useRouter } from "next/router"
 import { FormEvent, useEffect, useState } from "react"
 
+import { formatPrice } from "../../utils/format"
+
 import { Header } from "../../components/Header"
 import { api } from "../../services/api"
 import { Button } from "../../shared/Button"
 import { Input } from "../../shared/Input"
 
 import commomStyles from '../../styles/commom.module.scss'
-import { formatPrice } from "../../utils/format"
 import styles from './styles.module.scss'
 
 interface NewProfile {
@@ -36,19 +37,31 @@ interface ProfileProps {
 }
 
 export default function Profile2({ profile }: ProfileProps) {
-    const route = useRouter()
+    const routes = useRouter()
     const session = useSession()
 
     let activeProfile: Profile
 
-    if (session.data)
+    if (session.data) {
         activeProfile = session?.data.activeProfile
+    }
 
     const [remuneration, setRemuneration] = useState(profile.remuneration)
     const [workingHoursPerDay, setWorkingHoursPerDay] = useState(profile.workingHoursPerDay)
     const [workingDaysPerWeek, setWorkingDaysPerWeek] = useState(profile.workingDaysPerWeek)
     const [vacationWeekPerYear, setVacationWeekPerYear] = useState(profile.vacationWeekPerYear)
     const [valueHour, setValueHour] = useState(profile.valueHour)
+
+    const profileData = {
+        name: profile.name,
+        email: profile.email,
+        avatarUrl: profile.avatarUrl,
+        remuneration: remuneration * 100,
+        workingHoursPerDay: workingHoursPerDay * 60 * 60,
+        workingDaysPerWeek,
+        vacationWeekPerYear,
+        valueHour
+    }
 
     useEffect(() => {
         if (remuneration && workingHoursPerDay && workingDaysPerWeek) {
@@ -73,23 +86,13 @@ export default function Profile2({ profile }: ProfileProps) {
     }
 
     function handleUpdateProfile() {
-        alert('Em desenvolvimento ...')
+        api.put(`/profiles/${profile.id}`, profileData)
+            .then(response => routes.push('/'))
     }
 
     function handleCreateProfile() {
-        const newProfile = {
-            name: profile.name,
-            email: profile.email,
-            avatarUrl: profile.avatarUrl,
-            remuneration: remuneration * 100,
-            workingHoursPerDay: workingHoursPerDay * 60 * 60,
-            workingDaysPerWeek,
-            vacationWeekPerYear,
-            valueHour
-        }
-
-        api.post(`/profiles`, newProfile)
-            .then(response => route.push('/'))
+        api.post(`/profiles`, profileData)
+            .then(response => routes.push('/'))
     }
 
     return (

@@ -25,7 +25,7 @@ export function Profile({profile}: ProfileProps) {
 
     return (
         <nav className={styles.perfil}>
-            <Link href={`/profile/${profile.email}`}>
+            <Link href={`/profile/me`}>
               <a>
                 <div>
                   <strong>{profile.name}</strong>

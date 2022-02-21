@@ -1,20 +1,22 @@
+import { FormEvent, useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { FormEvent, useEffect, useState } from "react";
+import { getSession } from "next-auth/react";
+
+import { api } from "../../services/api";
+
 import { formatPrice } from "../../utils/format";
 
 import { CardProjectAmount } from "../../components/CardProjectAmount";
 import { Header } from "../../components/Header";
 import { ModalDeleteJob } from "../../components/ModalDeleteJob";
 import { StatusJob } from "../../components/StatusJob";
-import { Input } from "../../shared/Input";
 
-import { api } from "../../services/api";
+import { Input } from "../../shared/Input";
 
 import commomStyles from '../../styles/commom.module.scss'
 import styles from './styles.module.scss'
-import { getSession } from "next-auth/react";
 
 interface Job {
     id?: number;
@@ -166,19 +168,6 @@ export default function Job(props: JobProps) {
     )
 }
 
-function formateStatusJob(status: string) {
-    switch (status) {
-        case 'INPROGRESS':
-            return 'Em andamento'
-
-        case 'CLOSED':
-            return 'Encerrado'
-    
-        default:
-            return 'Nao iniciado';
-    }
-}
-
 export const getServerSideProps: GetServerSideProps = async ({req, params}) => {
     const session = await getSession({req})
 
@@ -190,8 +179,6 @@ export const getServerSideProps: GetServerSideProps = async ({req, params}) => {
             }
         }
     }
-
-    console.log(session.activeProfile)
     
     const jobId = params.jobId
     const response = await api.get<Job>(`/profiles/${session.activeProfile.id}/jobs/${jobId}`)
@@ -204,7 +191,6 @@ export const getServerSideProps: GetServerSideProps = async ({req, params}) => {
                 ...job,
                 workingHoursPerDay: job.workingHoursPerDay / 60 / 60,
                 hoursEstimate: job.hoursEstimate / 60 / 60,
-                // status: formateStatusJob(job.status)
             },
             profile: session.activeProfile
         }
