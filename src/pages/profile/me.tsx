@@ -1,7 +1,8 @@
 import { GetServerSideProps } from "next"
 import { getSession, useSession } from "next-auth/react"
 import Head from "next/head"
-import { useState } from "react"
+import { useRouter } from "next/router"
+import { FormEvent, useEffect, useState } from "react"
 
 import { Header } from "../../components/Header"
 import { api } from "../../services/api"
@@ -9,6 +10,7 @@ import { Button } from "../../shared/Button"
 import { Input } from "../../shared/Input"
 
 import commomStyles from '../../styles/commom.module.scss'
+import { formatPrice } from "../../utils/format"
 import styles from './styles.module.scss'
 
 interface NewProfile {
@@ -34,6 +36,7 @@ interface ProfileProps {
 }
 
 export default function Profile2({ profile }: ProfileProps) {
+    const route = useRouter()
     const session = useSession()
 
     let activeProfile: Profile
@@ -45,7 +48,49 @@ export default function Profile2({ profile }: ProfileProps) {
     const [workingHoursPerDay, setWorkingHoursPerDay] = useState(profile.workingHoursPerDay)
     const [workingDaysPerWeek, setWorkingDaysPerWeek] = useState(profile.workingDaysPerWeek)
     const [vacationWeekPerYear, setVacationWeekPerYear] = useState(profile.vacationWeekPerYear)
-    const [valueHour, setValueHour] = useState(profile.valueHour | 0)
+    const [valueHour, setValueHour] = useState(profile.valueHour)
+
+    useEffect(() => {
+        if (remuneration && workingHoursPerDay && workingDaysPerWeek) {
+            const remunerationFormated = remuneration * 100
+
+            const calcValueHour = remunerationFormated / (workingDaysPerWeek * 4) / workingHoursPerDay
+            setValueHour(calcValueHour)
+        } else {
+            setValueHour(null)
+        }
+        
+    }, [remuneration, workingHoursPerDay, workingDaysPerWeek])
+
+    function handleSubmit(event: FormEvent) {
+        event.preventDefault()
+
+        if (activeProfile) {
+            handleUpdateProfile()
+        } else {
+            handleCreateProfile()
+        }
+    }
+
+    function handleUpdateProfile() {
+        alert('Em desenvolvimento ...')
+    }
+
+    function handleCreateProfile() {
+        const newProfile = {
+            name: profile.name,
+            email: profile.email,
+            avatarUrl: profile.avatarUrl,
+            remuneration: remuneration * 100,
+            workingHoursPerDay: workingHoursPerDay * 60 * 60,
+            workingDaysPerWeek,
+            vacationWeekPerYear,
+            valueHour
+        }
+
+        api.post(`/profiles`, newProfile)
+            .then(response => route.push('/'))
+    }
 
     return (
         <>
@@ -55,11 +100,11 @@ export default function Profile2({ profile }: ProfileProps) {
             <Header title={activeProfile != null ? 'Meu perfil' : 'Crie seu perfil'} />
             <main className={commomStyles.wrapper}>
                 <section className={commomStyles.container}>
-                    <form action="#" className={styles.formContainer}>
+                    <form onSubmit={handleSubmit} className={styles.formContainer}>
                         <aside className={styles.hourValueCard}>
                             <img src={profile.avatarUrl} alt="perfil" />
                             <h2>{profile.name}</h2>
-                            <p>O valor da sua hora é <strong>R$ {valueHour} reais</strong>
+                            <p>O valor da sua hora é <strong>{formatPrice(valueHour / 100)} reais</strong>
                             </p>
                             
                             <Button color='primary'>
@@ -77,10 +122,27 @@ export default function Profile2({ profile }: ProfileProps) {
                             <div className={styles.fieldGroup}> 
                                 <h3>Planejamento</h3>
                                 <div className={styles.row}>
-                                    <Input label='Quanto eu quero ganhar por mês?' placeholder='R$' defaultValue={remuneration} />
-                                    <Input label='Quantas horas quero trabalhar por dia?' defaultValue={workingHoursPerDay} />
-                                    <Input label='Quantos dias quero trabalhar por semana?' defaultValue={workingDaysPerWeek} />
-                                    <Input label='Quantas semanas por ano você quer tirar férias?' defaultValue={vacationWeekPerYear} />
+                                    <Input 
+                                        label='Quanto eu quero ganhar por mês?'
+                                        placeholder='R$'
+                                        onChange={(e) => setRemuneration((Number(e.currentTarget.value)))}
+                                        defaultValue={remuneration} 
+                                    />
+                                    <Input 
+                                        label='Quantas horas quero trabalhar por dia?'
+                                        defaultValue={workingHoursPerDay}
+                                        onChange={(e) => setWorkingHoursPerDay(Number(e.currentTarget.value))}
+                                    />
+                                    <Input 
+                                        label='Quantos dias quero trabalhar por semana?'
+                                        defaultValue={workingDaysPerWeek}
+                                        onChange={(e) => setWorkingDaysPerWeek(Number(e.currentTarget.value))}
+                                    />
+                                    <Input 
+                                        label='Quantas semanas por ano você quer tirar férias?'
+                                        defaultValue={vacationWeekPerYear}
+                                        onChange={(e) => setVacationWeekPerYear(Number(e.currentTarget.value))}
+                                    />
                                 </div>
                             </div>
                         </div>
