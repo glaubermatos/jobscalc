@@ -14,6 +14,7 @@ import { api } from "../../services/api";
 
 import commomStyles from '../../styles/commom.module.scss'
 import styles from './styles.module.scss'
+import { getSession } from "next-auth/react";
 
 interface Job {
     id?: number;
@@ -179,11 +180,21 @@ function formateStatusJob(status: string) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({req, params}) => {
-    const responseProfile = await api.get('/profiles/glaub.oliveira@hotmail.com')
-    const profile = responseProfile.data
+    const session = await getSession({req})
+
+    if (!session?.user) {
+        return {
+            redirect: {
+            destination: '/signin',
+            permanent: false
+            }
+        }
+    }
+
+    console.log(session.activeProfile)
     
     const jobId = params.jobId
-    const response = await api.get<Job>(`/profiles/1/jobs/${jobId}`)
+    const response = await api.get<Job>(`/profiles/${session.activeProfile.id}/jobs/${jobId}`)
 
     const job = response.data
     
@@ -195,7 +206,7 @@ export const getServerSideProps: GetServerSideProps = async ({req, params}) => {
                 hoursEstimate: job.hoursEstimate / 60 / 60,
                 // status: formateStatusJob(job.status)
             },
-            profile
+            profile: session.activeProfile
         }
     }
 }

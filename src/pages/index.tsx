@@ -4,8 +4,6 @@ import Link from 'next/link'
 import { getSession, signOut } from 'next-auth/react'
 import { useState } from 'react'
 
-import Modal from 'react-modal'
-
 import { formatPrice } from '../utils/format'
 
 import { ButtonNewJob } from '../components/ButtonNewJob'
@@ -16,8 +14,6 @@ import { Profile } from '../components/Profile'
 
 import commomStyles from '../styles/commom.module.scss'
 import styles from './home.module.scss'
-
-Modal.setAppElement('#root')
 
 interface Profile {
   id: number;
