@@ -13,12 +13,7 @@ import { Input } from "../../shared/Input"
 
 import commomStyles from '../../styles/commom.module.scss'
 import styles from './styles.module.scss'
-
-interface NewProfile {
-    email: string;
-    name: string;
-    avatarUrl: string;
-}
+import { toast } from "react-toastify"
 
 export interface Profile {
     id?: number;
@@ -36,7 +31,7 @@ interface ProfileProps {
     profile: Profile;
 }
 
-export default function Profile2({ profile }: ProfileProps) {
+export default function Profile({ profile }: ProfileProps) {
     const routes = useRouter()
     const session = useSession()
 
@@ -87,18 +82,27 @@ export default function Profile2({ profile }: ProfileProps) {
 
     function handleUpdateProfile() {
         api.put(`/profiles/${profile.id}`, profileData)
-            .then(response => routes.push('/'))
+            .then(response => {
+                toast.success('Seu perfil está atualizado')
+                routes.push('/')
+            })
     }
 
     function handleCreateProfile() {
         api.post(`/profiles`, profileData)
-            .then(response => routes.push('/'))
+            .then(response => {
+                toast.success('Tudo certo. Adicione seu primeiro Job')
+                routes.push('/')
+            })
+            .catch(response => {
+                toast.error('Desculpe! preencha todos os campos')
+            })
     }
 
     return (
         <>
             <Head>
-                <title>{activeProfile != null ? 'Profile | JobsCalc' : 'Create new profile | JobsCalc'}</title>
+                <title>{activeProfile != null ? 'Perfil | JobsCalc' : 'Crie seu perfil | JobsCalc'}</title>
             </Head>
             <Header title={activeProfile != null ? 'Meu perfil' : 'Crie seu perfil'} />
             <main className={commomStyles.wrapper}>

@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { getSession } from 'next-auth/react'
 import Head from 'next/head'
 
+import { toast } from 'react-toastify';
+
 import { api } from '../services/api'
 import { formatPrice } from '../utils/format'
 
@@ -67,7 +69,7 @@ export default function Home(props: HomeProps) {
     const response = await api.delete(`/profiles/${profile.id}/jobs/${job.id}`)
 
     if (response.status === 204) {
-      alert('Job excluído com sucesso.')
+      toast.success("Job excluído");
       
       const response = await api.get(`/profiles/${profile.id}/jobs`)
 

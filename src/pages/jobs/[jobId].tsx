@@ -4,6 +4,8 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
 
+import { toast } from 'react-toastify'
+
 import { api } from "../../services/api";
 
 import { formatPrice } from "../../utils/format";
@@ -62,19 +64,20 @@ export default function Job(props: JobProps) {
         
     }, [hoursEstimate])
 
-    async function createNewJob(newJob: Job) {
+    async function updateJob(jobToUpdate: Job) {
         try {
-            await api.put(`/profiles/${props.profile.id}/jobs/${job.id}`, newJob)
+            await api.put(`/profiles/${props.profile.id}/jobs/${job.id}`, jobToUpdate)
             router.push('/')
-            alert('Job salvo com sucesso')
+            toast.success("Job atualizado");
         } catch(error) {
+            toast.error('Desculpe! Algo de estranho aconteceu')
             console.log(error)
         }
     }
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault()
-        const newJob = {
+        const jobToUpdate = {
             name,
             workingHoursPerDay: ((workingHoursPerDay * 60) * 60),
             hoursEstimate: ((hoursEstimate * 60) * 60),
@@ -82,7 +85,7 @@ export default function Job(props: JobProps) {
             status
         }
 
-        createNewJob(newJob)
+        updateJob(jobToUpdate)
     }
 
     function handleOpenModalDeleteJob() {
@@ -97,15 +100,15 @@ export default function Job(props: JobProps) {
         const response = await api.delete(`/profiles/${props.profile.id}/jobs/${job.id}`)
     
         if (response.status === 204) {
-          alert('Job excluído com sucesso.')
-          router.push('/')
+            toast.success("Job excluído");
+            router.push('/')
         }
       }
 
     return(
         <>
             <Head>
-                <title>Adicionar novo job | JobsCalc</title>
+                <title>Atualizar job | JobsCalc</title>
             </Head>
             <Header title="Editar Job" />
             <main className={commomStyles.wrapper}>

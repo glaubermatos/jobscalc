@@ -11,7 +11,7 @@ export default function SignIn() {
     return (
         <>
             <Head>
-                <title>Sign In with Github | JobsCalc</title>
+                <title>Entrar com Github | JobsCalc</title>
             </Head>
             <main className={styles.main}>
                 <div className={styles.imagem}></div>

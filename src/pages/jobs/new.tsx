@@ -3,6 +3,8 @@ import { GetServerSideProps } from "next";
 import { useRouter } from 'next/router'
 import Head from "next/head";
 
+import { toast } from 'react-toastify';
+
 import { formatPrice } from "../../utils/format";
 
 import { CardProjectAmount } from "../../components/CardProjectAmount";
@@ -46,14 +48,14 @@ export default function NewJob({profile}: NewJobProps) {
     function createNewJob(job: Job) {
         api.post(`/profiles/${profile.id}/jobs`, job)
             .then(response => {
-                alert('Job criado com sucesso')
+                toast.success("Job adicionado");
                 router.push('/')
             })
             .catch(error => {
                 const { data } = error.response
                 const problem = data
 
-                alert(`Ops! ${problem.title}`)
+                toast.error(`Desculpe! ${problem.title}`)
             })
           
     }

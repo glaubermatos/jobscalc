@@ -1,6 +1,5 @@
 import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
-import { FiArrowLeft } from 'react-icons/fi'
 
 import commomStyles from '../../styles/commom.module.scss'
 import styles from './styles.module.scss'
@@ -10,16 +9,11 @@ interface HeaderProps {
 }
 
 export function Header({title}: HeaderProps) {
-    const session = useSession()    
-
-    let activeProfile
-
-    if (session.data)
-        activeProfile = session?.data.activeProfile
+    const { data: session, status } = useSession()   
 
     return <header className={styles.header}>
         <div className={commomStyles.container}>
-            {activeProfile != null ? (
+            {status === "authenticated" ? (
                 <Link href={'/'}>
                     <a>
                         {/* <FiArrowLeft size={'1.5rem'}/> */}
@@ -27,7 +21,9 @@ export function Header({title}: HeaderProps) {
                     </a>
                 </Link>
             ) : (
-                <button onClick={() => signOut()}>
+                <button 
+                    onClick={() => signOut()}
+                >
                     <img src="/arrow-left.svg" alt="back" />
                     Cancelar
                 </button>
