@@ -148,7 +148,6 @@ export default function Home(props: HomeProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({req}) => {
-  
   const session = await getSession({req})
   
   if (!session?.user) {
@@ -169,7 +168,7 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
     }
   }
 
-  const responseJobs = await api.get(`/profiles/${session.activeProfile.id}/jobs`)
+  const responseJobs = await api.get(`/profiles/${session?.activeProfile?.id}/jobs`)
 
   const jobWrapper = await responseJobs.data
 

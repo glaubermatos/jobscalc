@@ -161,14 +161,13 @@ export default function Profile({ profile }: ProfileProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({req}) => {
-    
     const session = await getSession({req})
 
     if (!session?.user) {
         return {
             redirect: {
-            destination: '/signin',
-            permanent: false
+                destination: '/signin',
+                permanent: false
             }
         }
     }

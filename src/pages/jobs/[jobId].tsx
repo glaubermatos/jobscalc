@@ -177,8 +177,8 @@ export const getServerSideProps: GetServerSideProps = async ({req, params}) => {
     if (!session?.user) {
         return {
             redirect: {
-            destination: '/signin',
-            permanent: false
+                destination: '/signin',
+                permanent: false
             }
         }
     }

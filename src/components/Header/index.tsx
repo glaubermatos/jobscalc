@@ -9,11 +9,17 @@ interface HeaderProps {
 }
 
 export function Header({title}: HeaderProps) {
-    const { data: session, status } = useSession()   
+    const { data: session, status } = useSession() 
+    
+    let hasActiveProfile = false
+    
+    if (status === 'authenticated' && session.activeProfile){
+        hasActiveProfile = true
+    }
 
     return <header className={styles.header}>
         <div className={commomStyles.container}>
-            {status === "authenticated" ? (
+            {hasActiveProfile ? (
                 <Link href={'/'}>
                     <a>
                         {/* <FiArrowLeft size={'1.5rem'}/> */}
