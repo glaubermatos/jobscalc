@@ -5,7 +5,6 @@ import Head from 'next/head'
 
 import { toast } from 'react-toastify';
 
-import { api } from '../services/api'
 import { formatPrice } from '../utils/format'
 
 import { ButtonNewJob } from '../components/ButtonNewJob'
@@ -15,6 +14,8 @@ import { Profile } from '../components/Profile'
 
 import commomStyles from '../styles/commom.module.scss'
 import styles from './home.module.scss'
+import { backend } from './api/_lib/services/backend';
+import { api } from '../services/api';
 
 interface Profile {
   id: number;
@@ -168,7 +169,7 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
     }
   }
 
-  const responseJobs = await api.get(`/profiles/${session?.activeProfile?.id}/jobs`)
+  const responseJobs = await backend.get(`/profiles/${session?.activeProfile?.id}/jobs`)
 
   const jobWrapper = await responseJobs.data
 

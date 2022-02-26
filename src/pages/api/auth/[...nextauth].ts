@@ -1,9 +1,9 @@
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 
-import { api } from "../../../services/api"
 
 import { Profile } from "../../profile/me"
+import { backend } from "../_lib/services/backend"
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -20,7 +20,7 @@ export default NextAuth({
 
       try {
         //chamada a api para verificar se existe um usuário com o email do github
-        const response = await api.get(`/profiles/${session.user.email}`)
+        const response = await backend.get(`/profiles/${session.user.email}`)
 
         const profile: Profile = response.data
 

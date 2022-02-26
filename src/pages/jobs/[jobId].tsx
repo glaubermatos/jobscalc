@@ -6,7 +6,6 @@ import { getSession } from "next-auth/react";
 
 import { toast } from 'react-toastify'
 
-import { api } from "../../services/api";
 
 import { formatPrice } from "../../utils/format";
 
@@ -19,6 +18,8 @@ import { Input } from "../../shared/Input";
 
 import commomStyles from '../../styles/commom.module.scss'
 import styles from './styles.module.scss'
+import { backend } from "../api/_lib/services/backend";
+import { api } from "../../services/api";
 
 interface Job {
     id?: number;
@@ -184,7 +185,7 @@ export const getServerSideProps: GetServerSideProps = async ({req, params}) => {
     }
     
     const jobId = params.jobId
-    const response = await api.get<Job>(`/profiles/${session.activeProfile.id}/jobs/${jobId}`)
+    const response = await backend.get<Job>(`/profiles/${session.activeProfile.id}/jobs/${jobId}`)
 
     const job = response.data
     

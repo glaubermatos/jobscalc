@@ -15,6 +15,7 @@ import { Input } from "../../shared/Input";
 import commomStyles from '../../styles/commom.module.scss'
 import styles from './styles.module.scss'
 import { getSession } from "next-auth/react";
+import { saveNewJob } from "../api/_lib/manageJob";
 
 interface Job {
     name: string;
@@ -45,20 +46,20 @@ export default function NewJob({profile}: NewJobProps) {
     // verificar a quantidade de horas de trabalho por dia do perfil bate 
     // com a quantidade de horas dedicada ao job
 
-    function createNewJob(job: Job) {
-        api.post(`/profiles/${profile.id}/jobs`, job)
-            .then(response => {
-                toast.success("Job adicionado");
-                router.push('/')
-            })
-            .catch(error => {
-                const { data } = error.response
-                const problem = data
+    // function createNewJob(job: Job) {
+    //     api.post(`/profiles/${profile.id}/jobs`, job)
+    //         .then(response => {
+    //             toast.success("Job adicionado");
+    //             router.push('/')
+    //         })
+    //         .catch(error => {
+    //             const { data } = error.response
+    //             const problem = data
 
-                toast.error(`Desculpe! ${problem.title}`)
-            })
+    //             toast.error(`Desculpe! ${problem.title}`)
+    //         })
           
-    }
+    // }
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault()
@@ -69,7 +70,29 @@ export default function NewJob({profile}: NewJobProps) {
             projectValue
         }
 
-        createNewJob(newJob)
+        api.post(`/profiles/${profile.id}`, newJob)
+            .then(response => {
+                toast.success("Job adicionado");
+                router.push('/')
+            })
+            .catch(error => {
+                const { data } = error.response
+                const problem = data
+            
+                toast.error(`Desculpe! ${problem.title}`)
+            })
+
+        // saveNewJob(newJob, profile.id)
+        //     .then(response => {
+        //         toast.success("Job adicionado");
+        //         router.push('/')
+        //     })
+        //     .catch(error => {
+        //         const { data } = error.response
+        //         const problem = data
+            
+        //         toast.error(`Desculpe! ${problem.title}`)
+        //     })
     }
 
     useEffect(() => {
