@@ -63,6 +63,7 @@ export default function NewJob({profile}: NewJobProps) {
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault()
+        
         const newJob = {
             name,
             workingHoursPerDay: ((workingHoursPerDay * 60) * 60),
@@ -70,7 +71,7 @@ export default function NewJob({profile}: NewJobProps) {
             projectValue
         }
 
-        api.post(`/profiles/${profile.id}`, newJob)
+        api.post(`/profiles/${profile.id}/jobs`, newJob)
             .then(response => {
                 toast.success("Job adicionado");
                 router.push('/')
@@ -78,8 +79,10 @@ export default function NewJob({profile}: NewJobProps) {
             .catch(error => {
                 const { data } = error.response
                 const problem = data
+
+                console.log(problem.title)
             
-                toast.error(`Desculpe! ${problem.title}`)
+                toast.error(`Desculpe! não conseguimos processar sua requisição`)
             })
 
         // saveNewJob(newJob, profile.id)

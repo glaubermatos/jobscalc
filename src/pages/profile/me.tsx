@@ -83,19 +83,32 @@ export default function Profile({ profile }: ProfileProps) {
     function handleUpdateProfile() {
         api.put(`/profiles/${profile.id}`, profileData)
             .then(response => {
-                toast.success('Seu perfil está atualizado')
+                toast.success('Perfil atualizado')
                 routes.push('/')
+            })
+            .catch(error => {
+                const { data } = error.response
+                const problem = data
+
+                console.log(problem.title)
+            
+                toast.error(`Desculpe! não conseguimos processar sua requisição`)
             })
     }
 
     function handleCreateProfile() {
         api.post(`/profiles`, profileData)
             .then(response => {
-                toast.success('Tudo certo. Adicione seu primeiro Job')
+                toast.success('Perfil criado')
                 routes.push('/')
             })
-            .catch(response => {
-                toast.error('Desculpe! preencha todos os campos')
+            .catch(error => {
+                const { data } = error.response
+                const problem = data
+
+                console.log(problem.title)
+            
+                toast.error(`Desculpe! não conseguimos processar sua requisição`)
             })
     }
 

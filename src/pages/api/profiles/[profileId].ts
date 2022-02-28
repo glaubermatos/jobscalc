@@ -1,25 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { saveNewJob } from "../_lib/manageJob"
 import { backend } from "../_lib/services/backend"
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-    if (req.method === 'POST') {
+export default (req: NextApiRequest, res: NextApiResponse) => {
+    if (req.method === 'PUT') {
         const {profileId} = req.query
-        const {job} = req.body
-        
-        console.log({profileId, job})
+        const profileToUpdate = req.body
 
+        backend.put(`/profiles/${profileId}`, profileToUpdate)
+            .then(response => res.status(response.status).send(response.data))
+            .catch(error => res.status(error.response.status).send(error.response.data))
     } 
-    // else 
-    //     if (req.method === 'GET') {
-    //         const {email} = req.query
-            
-    //         console.log(email)
-
-    //         const response = await api.get(`/profiles/${email}`)
-
-    //         return res.json(response.data)
-    // }
-
-    res.status(200)
 }

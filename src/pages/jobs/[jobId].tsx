@@ -68,11 +68,15 @@ export default function Job(props: JobProps) {
     async function updateJob(jobToUpdate: Job) {
         try {
             await api.put(`/profiles/${props.profile.id}/jobs/${job.id}`, jobToUpdate)
-            router.push('/')
             toast.success("Job atualizado");
+            
+            router.push('/')
         } catch(error) {
-            toast.error('Desculpe! Algo de estranho aconteceu')
-            console.log(error)
+            const { data } = error.response
+            const problem = data
+            console.log(problem.title)
+
+            toast.error('Desculpe! não conseguimos processar sua requisição')
         }
     }
 
@@ -99,7 +103,7 @@ export default function Job(props: JobProps) {
 
       async function handleDeleteJob() {
         const response = await api.delete(`/profiles/${props.profile.id}/jobs/${job.id}`)
-    
+          
         if (response.status === 204) {
             toast.success("Job excluído");
             router.push('/')
