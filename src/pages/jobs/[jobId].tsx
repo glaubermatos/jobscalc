@@ -9,6 +9,9 @@ import { toast } from 'react-toastify'
 
 import { formatPrice } from "../../utils/format";
 
+import { backend } from "../api/_lib/services/backend";
+import { api } from "../../services/api";
+
 import { CardProjectAmount } from "../../components/CardProjectAmount";
 import { Header } from "../../components/Header";
 import { ModalDeleteJob } from "../../components/ModalDeleteJob";
@@ -18,8 +21,6 @@ import { Input } from "../../shared/Input";
 
 import commomStyles from '../../styles/commom.module.scss'
 import styles from './styles.module.scss'
-import { backend } from "../api/_lib/services/backend";
-import { api } from "../../services/api";
 
 interface Job {
     id?: number;

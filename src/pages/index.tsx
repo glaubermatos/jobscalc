@@ -7,6 +7,9 @@ import { toast } from 'react-toastify';
 
 import { formatPrice } from '../utils/format'
 
+import { backend } from './api/_lib/services/backend';
+import { api } from '../services/api';
+
 import { ButtonNewJob } from '../components/ButtonNewJob'
 import { JobsTable } from '../components/JobsTable'
 import { ModalDeleteJob } from '../components/ModalDeleteJob'
@@ -14,8 +17,6 @@ import { Profile } from '../components/Profile'
 
 import commomStyles from '../styles/commom.module.scss'
 import styles from './home.module.scss'
-import { backend } from './api/_lib/services/backend';
-import { api } from '../services/api';
 
 interface Profile {
   id: number;

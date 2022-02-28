@@ -1,19 +1,20 @@
+import { FormEvent, useEffect, useState } from "react"
 import { GetServerSideProps } from "next"
 import { getSession, useSession } from "next-auth/react"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import { FormEvent, useEffect, useState } from "react"
+import { toast } from "react-toastify"
 
 import { formatPrice } from "../../utils/format"
 
-import { Header } from "../../components/Header"
 import { api } from "../../services/api"
+
+import { Header } from "../../components/Header"
 import { Button } from "../../shared/Button"
 import { Input } from "../../shared/Input"
 
 import commomStyles from '../../styles/commom.module.scss'
 import styles from './styles.module.scss'
-import { toast } from "react-toastify"
 
 export interface Profile {
     id?: number;
