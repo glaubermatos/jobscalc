@@ -18,7 +18,7 @@ export default function SignIn() {
                 <div className={styles.content}>
                     <div className={styles.signin}>
                         <img src="logo.svg" alt="" />
-                        <p>Gerêncie seus jobs de forma simples e fácil</p>
+                        <p>Gerêncie seus trabalhos freelancer de forma simples e fácil</p>
                         <SignInButton />
                     </div>
                 </div>

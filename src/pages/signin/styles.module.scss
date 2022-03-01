@@ -34,17 +34,29 @@
 
 .signin {
     margin-left: 6rem;
-    width: 22rem;
+    width: min(22rem, 90%);
 
     img {
-        width: 22.5rem;
+        width: min(22rem, 90%);
         margin-bottom: 3rem;
     }
 
     p {
         margin-bottom: 2rem;
-        max-width: 13.75rem;
+        max-width: 16.75rem;
         color: var(--white-500);
         line-height: 1.625rem;
+    }
+}
+
+@media(max-width:1390px) {
+    .signin {
+        margin: 0 auto;
+    }
+}
+  
+@media(max-width:770px) {
+    .imagem {
+        display: none;
     }
 }

@@ -98,7 +98,7 @@ export default function Home(props: HomeProps) {
       <header className={styles.header}>
         <div className={commomStyles.container}>
           <div className={styles.menu}>
-            <img src="/logo.svg" alt="logo" />
+            <img className={styles.logo} src="/logo.svg" alt="logo" />
             {/* <span>
               <img src="/alert-octagon.svg" alt="alert" />
               Você tem 2 horas livres no seu dia

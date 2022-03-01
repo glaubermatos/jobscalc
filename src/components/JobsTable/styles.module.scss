@@ -6,16 +6,20 @@
 }
 
 .job {
-    height: 6rem;
+    // height: 6rem;
     background: var(--white-500);
     border-radius: 0.3125rem;
-    padding: 0 2rem;
+    padding: 1.5rem 2rem;
 
     border: solid 1px var(--gray-200);
 
-    display: flex;
-    // justify-content: space-between;
+    display: grid;
+    grid-template-columns: 5% 35% 20% 15% 15% 10%;
     align-items: center;
+
+    // display: flex;
+    // // justify-content: space-between;
+    // align-items: center;
 
     position: relative;
     
@@ -49,62 +53,73 @@
             background: var(--orange-500);
         }
 
-        & .row span {
+        & .column.id span {
             color: var(--orange-500);
         }
     }
+
+    .column:last-child {
+      justify-self: flex-end;
+    }
     
-    span {
+    .column > span {
+        display: block;
+
+        font-family: Inter;
+        font-weight: 600;
+        font-size: 0.75rem;
+        line-height: 1.375rem;
+        text-transform: uppercase;
+
         color: var(--gray-300);
     }
 
-    .row {
-        width: 22rem;
-        font: 600 1rem 'IBM Plex Sans', sans-serif;
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-        margin-right: 1rem;
-
-        strong {
-            color: var(--gray-500);
-            font-weight: 600;
-            font-size: 1.5rem;
-            line-height: 2.125rem;
-
-            white-space: nowrap;// não quebra a linha
-            overflow: hidden; //esconde o conteúdo que extrapola os limites
-            text-overflow: ellipsis; //mostra os três pontinhos quando o texto extrapolar os limites
-        }
-    }
-
-    .content {
-        flex: 1;
-        display: grid;
-        grid-template-columns: 2fr 1fr 2fr;
-        grid-template-rows: auto;
-        gap: 2rem;
-        margin-right: 5.25rem;
-    }
-
-    .column {
-        display: flex;
-        flex-direction: column;
+    .column > strong {
         font-weight: 600;
+        color: var(--gray-400);
+    }
 
-        span {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            line-height: 1.375rem;
-        }
+    .column.id {
+        font: 600 1rem 'IBM Plex Sans', sans-serif;
+    }
 
-        strong {
-            color: var(--gray-400);
+    .column.name {
+        font: 600 1rem 'IBM Plex Sans', sans-serif;
+
+        color: var(--gray-500);
+        font-size: 1.5rem;
+        line-height: 2.125rem;
+
+        white-space: nowrap;// não quebra a linha
+        overflow: hidden; //esconde o conteúdo que extrapola os limites
+        text-overflow: ellipsis; //mostra os três pontinhos quando o texto extrapolar os limites
+    }
+
+    .column.actions {
+        display: flex;
+        gap: 0.5rem;
+        
+        button {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--white-500);
+            border: solid 1px var(--gray-200);
+            border-radius: 0.3125rem;
+
+            transition: background 0.2s;
+
+            &:hover {
+                background: var(--white-200);
+            }
+
+            svg {
+                stroke: var(--gray-400);
+            }
         }
     }
 
-    .status {
-        margin-left: 1.25rem;
+    .badge {
+        display: block;
         height: 2.5rem;
         border-radius: 2.5rem;
         padding: 0 1.5rem;
@@ -130,27 +145,53 @@
             color: var(--red-500);
         }
     }
-
-    .actions {
-        display: flex;
-        gap: 0.5rem;
-        
-        button {
-            width: 2.5rem;
-            height: 2.5rem;
-            background: var(--white-500);
-            border: solid 1px var(--gray-200);
-            border-radius: 0.3125rem;
-
-            transition: background 0.2s;
-
-            &:hover {
-                background: var(--white-200);
-            }
-
-            svg {
-                stroke: var(--gray-400);
-            }
-        }
-    }
 }
+
+@media(max-width:1390px) {
+    .job {
+      grid-template-columns: 5% 30% 20% 15% 17.25% 12.25%;
+    }
+  }
+  
+  @media(max-width:970px) {
+    .job {
+      grid-template-columns: 31% 23% 13% 20.25% 12.25%;
+    }
+    
+    .column.id {
+      display: none;
+    }
+  }
+  
+  @media(max-width:770px) {
+    .job {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: 
+      "lt rt"
+      "lm rm"
+      "lb rb"
+      ;
+      gap: .5rem;
+    }
+  
+    .column.id {
+      display: none;
+    }
+  
+    .column.name {
+      grid-area: lt;
+    }
+    .column.deadline {
+      grid-area: lm;
+    }
+    .column.amount {
+      grid-area: lb;
+    }
+    .column.status {
+      justify-self: end;
+      grid-area: rt;
+    }
+    .column.actions{
+      grid-area: rb;
+    }
+  }
