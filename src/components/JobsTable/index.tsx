@@ -41,8 +41,7 @@ export function JobsTable({profileId, jobs, onOpenModalDeleteJob}: JobsTableProp
                     <span>Valor</span>
                     <strong>{job.amount}</strong>
                 </div>
-                <div className={`${styles.column} ${styles.status}`}
-                >
+                <div className={`${styles.column} ${styles.status}`} >
                     <label className={`${styles.badge} ${styles.status} ${job.status === 'INPROGRESS' ? (
                                 styles.inProgress
                             ) : (job.status === 'CLOSED' ? (styles.closed) : (styles.notStarted))}`}

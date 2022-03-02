@@ -1,7 +1,14 @@
 .header {
+    width: 100%;
     background: var(--brown-500);
     height: 5.5rem;
     color: var(--gray-300);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 1;
 
     & > div {
         height: 100%;

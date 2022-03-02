@@ -85,7 +85,7 @@
 
     .column.name {
         font: 600 1rem 'IBM Plex Sans', sans-serif;
-
+        margin-right: 0.75rem;
         color: var(--gray-500);
         font-size: 1.5rem;
         line-height: 2.125rem;
@@ -93,6 +93,12 @@
         white-space: nowrap;// não quebra a linha
         overflow: hidden; //esconde o conteúdo que extrapola os limites
         text-overflow: ellipsis; //mostra os três pontinhos quando o texto extrapolar os limites
+    }
+
+    .column.status {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
     }
 
     .column.actions {
@@ -119,7 +125,6 @@
     }
 
     .badge {
-        display: block;
         height: 2.5rem;
         border-radius: 2.5rem;
         padding: 0 1.5rem;
@@ -167,9 +172,9 @@
     .job {
       grid-template-columns: 1fr 1fr;
       grid-template-areas: 
-      "lt rt"
-      "lm rm"
-      "lb rb"
+      "lt lt rt"
+      "lm lm rm"
+      "lb lb rb"
       ;
       gap: .5rem;
     }
@@ -193,5 +198,16 @@
     }
     .column.actions{
       grid-area: rb;
+    }
+  }
+
+  @media(max-width: 475px) {
+    .column.status {
+        grid-area: rt;
+
+        .badge {
+          height: 2rem;
+          padding: 0 1rem;
+      }
     }
   }

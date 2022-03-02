@@ -5,6 +5,8 @@
     bottom: 0;
     left: 0;
 
+    z-index: 10;
+
     background: rgba(65, 65, 76, 0.9);
 
     display: flex;
@@ -13,7 +15,7 @@
 }
 
 .reactModalContent {
-    max-width: 28rem;
+    width: min(28rem, 90%);
     background: var(--white-200);
     border-radius: 0.3125rem;
     padding: 2.5rem 2.625rem;
@@ -51,9 +53,11 @@
         justify-content: center;
         align-items: center;
 
-        button + button {
-            margin-left: 0.5rem;
-        }
+        gap: 0.5rem;
+
+        // button + button {
+        //     margin-left: 0.5rem;
+        // }
 
         // button {
         //     display: inline-block;
@@ -65,4 +69,17 @@
     }
 
     
+}
+
+@media(max-width: 426px) {
+    .modalActions {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        button {
+            width: 100%;
+        }
+    }
 }

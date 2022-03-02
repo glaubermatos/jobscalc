@@ -17,6 +17,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     <SessionProvider session={session}>
 
       <ToastContainer 
+        theme='dark'
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}

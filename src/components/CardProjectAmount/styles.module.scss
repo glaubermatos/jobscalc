@@ -5,8 +5,13 @@
     border: 1px solid var(--gray-200);
     border-radius: 0.3125rem;
     padding: 2.5rem 3.375rem;
-    
+
     text-align: center;
+    
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
 
     &.largeFontSize {
         p {
@@ -16,6 +21,7 @@
     }
 
     p {
+        text-align: center;
         width: 16.0625rem;
         margin-top: 1.5rem;
         color: var(--gray-500);
@@ -40,6 +46,43 @@
 
         button:last-child {
             padding: 0 0.75rem;
+        }
+    }
+}
+
+@media(max-width:821px) {
+    .cardWrapper {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+
+        padding: 2rem 2.375rem 1.5rem;
+
+        // display: flex;
+        // align-items: flex-end;
+        // justify-content: center;
+
+        // gap: 1.5rem;
+
+        img {
+            width: 0;
+            height: 0;
+            display: none;
+        }
+
+        p {
+            display: inline-block;
+            // text-align: right;
+            // margin: 0 auto;
+            // // margin-top: 1.5rem;
+            margin-top: 0;
+        }
+
+        .actions {
+            // flex: 1;
+    
+            margin-top: 1.5rem;
         }
     }
 }

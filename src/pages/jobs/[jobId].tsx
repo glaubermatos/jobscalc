@@ -142,11 +142,13 @@ export default function Job(props: JobProps) {
                                 </div>
                                 <div className={styles.grid2}>
                                     <Input 
+                                        type='number'
                                         label='Quantas horas por dia vai dedicar ao Job?' 
                                         defaultValue={workingHoursPerDay}
                                         onChange={(e) => setWorkingHoursPerDay(Number(e.target.value))}
                                     />
                                     <Input 
+                                        type='number'
                                         label='Estimativa de horas para esse job'
                                         defaultValue={hoursEstimate}
                                         onChange={(e) => setHoursEstimate(Number(e.target.value))}

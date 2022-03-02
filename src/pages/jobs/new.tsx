@@ -97,11 +97,13 @@ export default function NewJob({profile}: NewJobProps) {
                                     />
                                 </div>
                                 <div className={styles.grid2}>
-                                    <Input 
+                                    <Input
+                                        type='number'
                                         label='Quantas horas por dia vai dedicar ao Job?'
                                         onChange={(event) => setWorkingHoursPerDay(Number(event.target.value))}    
                                     />
                                     <Input 
+                                        type='number'
                                         label='Estimativa de horas para esse job'
                                         onChange={(event) => setHoursEstimate(Number(event.target.value))}    
                                     />

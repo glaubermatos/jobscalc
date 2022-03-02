@@ -63,3 +63,11 @@ button {
     opacity: 0.8;
     cursor: not-allowed;
 }
+
+@media (max-width: 480px) {
+    .Toastify__toast-container--top-right {
+        top: auto !important;
+        bottom: 0 !important;
+        right: 1em !important;
+    }
+}

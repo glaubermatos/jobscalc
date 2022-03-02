@@ -35,3 +35,24 @@
         margin-top: 3.5rem;
     }
 }
+
+@media(max-width:821px) {
+    .formContainer {
+        margin-top: -2rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+        // margin-bottom: 8rem;
+        margin-bottom: 14rem;
+    }
+
+    .jobsData {
+        width: 100%;
+    }
+}
+
+@media(max-width:340px) {
+    .fieldGroup label {
+        font-size: 0.875rem;
+    }
+}
