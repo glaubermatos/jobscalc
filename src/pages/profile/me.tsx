@@ -160,7 +160,7 @@ export default function Profile({ profile }: ProfileProps) {
                                         onChange={(e) => setWorkingDaysPerWeek(Number(e.currentTarget.value))}
                                     />
                                     <Input 
-                                        label='Quantas semanas por ano você quer tirar férias?'
+                                        label='Quantas semanas por ano quer tirar férias?'
                                         defaultValue={vacationWeekPerYear}
                                         onChange={(e) => setVacationWeekPerYear(Number(e.currentTarget.value))}
                                     />
