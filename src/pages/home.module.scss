@@ -32,7 +32,8 @@
 
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    align-items: center;
+    // flex-wrap: wrap;
     gap: 1.5rem;
 }
 
@@ -64,9 +65,30 @@
     margin: -3rem 0 2.5rem;
 }
 
+@media(max-width: 671px) {
+    .summary {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+
+        .amounts {
+            gap: 1.5rem;
+        }
+    }
+}
+
 @media(max-width: 475px) {
     .menu {
         flex-wrap: wrap;
         gap: 1.25rem;
+
+        .imgContainer {
+        }
+
+        .logo {
+            margin-left: -10rem;
+            object-position: 10rem 0;
+        }
     }
 }

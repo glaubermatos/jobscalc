@@ -36,10 +36,10 @@ export function Profile({profile}: ProfileProps) {
             </Link>
             <button
                 type="button"
+                title='Sair'
                 onClick={handleSignOut}    
             >
                 <FiLogOut size={24} />
-                Sair
             </button>
         </nav>
     )
