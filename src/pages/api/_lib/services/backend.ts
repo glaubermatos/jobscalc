@@ -1,7 +1,9 @@
 import axios from 'axios'
 
+const isDevelopment = process.env.NODE_ENV !== 'production'
+
 export const backend = axios.create({
-    baseURL: 'http://localhost:8080/api',
+    baseURL: isDevelopment ? 'http://localhost:8080/api' : 'https://jobscalc-api.herokuapp.com/api',
     withCredentials: true,
     auth: {
         username: process.env.JOBSCALC_API_USERNAME,
