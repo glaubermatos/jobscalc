@@ -113,12 +113,12 @@ export default function NewJob({profile}: NewJobProps) {
 
                         {projectValue ? (
                             <CardProjectAmount largeFontSize>
-                                <img src="/dolar2.svg" alt="dolar" />
+                                <img src="/dolar2.svg" alt="dolar" loading="lazy" />
                                 <p>O valor do projeto ficou em <strong>{formatPrice(projectValue/100)} reais</strong></p>
                             </CardProjectAmount> 
                         ) : (
                             <CardProjectAmount>
-                                <img src="/dolar.svg" alt="dolar" />
+                                <img src="/dolar.svg" alt="dolar" loading="lazy" />
                                 <p>Preencha os dados ao lado para ver o valor do projeto</p>
                             </CardProjectAmount> 
                         )}

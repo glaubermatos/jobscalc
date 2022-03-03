@@ -1,12 +1,8 @@
 .jobsTable {
     width: 100%;
-
-    // height: 70vh;
-    // overflow-y: auto;
 }
 
 .job {
-    // height: 6rem;
     background: var(--white-500);
     border-radius: 0.3125rem;
     padding: 1.5rem 2rem;
@@ -17,10 +13,6 @@
     grid-template-columns: 5% 35% 20% 15% 15% 10%;
     align-items: center;
 
-    // display: flex;
-    // // justify-content: space-between;
-    // align-items: center;
-
     position: relative;
     
     & + .job {
@@ -28,34 +20,35 @@
     }
 
     &:hover {
-        &::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 70%;
-            height: 100%;
-            background: linear-gradient(
-                    90deg,
-                    rgba(250, 156, 45, 0.1) 0.45%,
-                    rgba(252, 253, 255, 0.1) 31.4%
-                );
-        }
+      background: linear-gradient(
+        90deg,
+        rgba(250, 156, 45, 0.1) 0.45%,
+        rgba(252, 253, 255, 0.1) 31.4%
+      ),
+      var(--white-500);
 
-        &::after {
-            content: '';
-            position: absolute;
-            left: -1px;
-            top: 0;
-            width: 0.25rem;
-            height: 100%;
-            border-radius: 0.3125rem 0 0 0.3125rem;
-            background: var(--orange-500);
-        }
+      &::before {
+        height: 100%;
+      }
 
-        & .column.id span {
-            color: var(--orange-500);
-        }
+      & .column.id span {
+        color: var(--orange-500);
+      }
+    }
+
+    &::before {
+      content: '';
+      width: 0.25rem;
+      height: 0%;
+
+      background: var(--orange-500);
+      border-radius: 0.3125rem 0 0 0.3125rem;
+
+      position: absolute;
+      left: -1px;
+      top: 0;
+
+      transition: all 0.2s;
     }
 
     .column:last-child {
