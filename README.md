@@ -1,34 +1,156 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/glaubermatos/jobscalc?color=%2304D361&style=flat">
 
-## Getting Started
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/glaubermatos/jobscalc?style=flat">
+  
+  <a href="https://github.com/glaubermatos/jobscalc/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/glaubermatos/jobscalc?style=flat">
+  </a>
+    
+   <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen?style=flat">
+  
+</p>
 
-First, run the development server:
+<h1 align="center">
+    <img src="./public/logo.svg" />
+</h1>
+
+<h4 align="center"> 
+	🚧  Aplicação finalizada! 🚧
+</h4>
+
+## 🏁 Tópicos
+
+<p>
+ 👉<a href="#-sobre-o-projeto" style="text-decoration: none; "> Sobre</a> <br/>
+👉<a href="#-funcionalidades" style="text-decoration: none; "> Funcionalidades</a> <br/>
+👉<a href="#-layout" style="text-decoration: none"> Layout</a> <br/>
+👉<a href="#-demonstracao" style="text-decoration: none"> Demonstração</a> <br/>
+👉<a href="#-como-executar-o-projeto" style="text-decoration: none"> Como executar</a> <br/>
+👉<a href="#-tecnologias" style="text-decoration: none"> Tecnologias</a> <br/>
+👉<a href="#-autor" style="text-decoration: none"> Autor</a> <br/>
+👉<a href="#user-content--licença" style="text-decoration: none"> Licença</a>
+
+</p>
+
+## 💻 Sobre o projeto
+
+Uma aplicação para cadastrar e calcular o valor dos seus projetos freelancers de forma simples e fácil.
+
+Confira o resultado no link abaixo:
+
+<a align="center" href="https://jobscalc-glauber.vercel.app/">
+    <img alt="app jobscalc" src="https://img.shields.io/static/v1?label=site&message=jobscalc&color=F1972C&style=flat&logo=vercel">
+</a>
+
+---
+
+<a name="-funcionalidades"></a>
+
+## ⚙️ Funcionalidades
+
+- [x] Front-end;
+  - [x] Página:
+    - [x] de Login com Github;
+    - [x] Principal listando os jobs em andamento, encerrados e não iniciado;
+    - [x] do perfil para configurar o planejamento de estimativas de ganhos e horas de trabalho;
+    - [x] para cadastro de jobs;
+    - [x] para editar jobs;
+    - [x] modal para deletar jobs;
+  - [x] Autenticação com Next-Auth;
+  - [x] Rotas privadas para usuários não autenticados;
+  - [x] Notificações com Toastify;
+
+---
+
+## 🎨 Layout
+
+- **[Layout Frontend](https://www.figma.com/file/1YbzIzsyRCfaDt86iUb6Lw/Jobs-Planning-Maratona-Discover2-Copy)**
+
+---
+
+<a name="-demonstracao"></a>
+
+## 🕹️ Demonstração
+
+<a align="center" href="">
+    <img alt="happy-web" src="https://img.shields.io/static/v1?label=post&message=jobscalc&color=F1972C&style=flat&logo=linkedin">
+</a>
+
+---
+
+## 🚀 Como executar o projeto
+
+💡O Frontend precisa que o Backend esteja sendo executado para funcionar, que pode ser encontrado **[AQUI](https://github.com/glaubermatos/jobscalc-api)**.
+
+### Pré-requisitos
+
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/), [Yarn](https://classic.yarnpkg.com/en/docs/install).
+Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
+
+#### 🧭 Rodando a aplicação web (Frontend)
 
 ```bash
-npm run dev
-# or
-yarn dev
+
+# Clone este repositório
+$ git clone https://github.com/glaubermatos/jobscalc.git
+
+# Acesse a pasta do projeto no seu terminal/cmd
+$ cd jobscalc
+
+# Instale as dependências
+$ yarn
+
+# Execute a aplicação em modo de desenvolvimento
+$ yarn dev
+
+# A aplicação será aberta na porta:3000 - acesse http://localhost:3000
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## 🛠 Tecnologias
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+As seguintes ferramentas foram usadas na construção do projeto:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+#### **Aplicação web** ([NextJS](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/))
 
-## Learn More
+- **[React Icons](https://react-icons.github.io/react-icons/)**
+- **[React-Leaflet](https://react-leaflet.js.org/)**
+- **[Axios](https://github.com/axios/axios)**
+- **[react-toastify](https://fkhadra.github.io/react-toastify/introduction)**
 
-To learn more about Next.js, take a look at the following resources:
+> Veja o arquivo [package.json](https://github.com/glaubermatos/jobscalc/package.json)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### **Utilitários**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Editor: **[Visual Studio Code](https://code.visualstudio.com/)**
+- Teste de API: **[Insomnia](https://insomnia.rest/)**
+- Ícones: **[Feather Icons](https://feathericons.com/)**
+- Fontes: **[Fontes](https://fonts.google.com/specimen/Nunito)**
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<a name="-autor"></a>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 🦸‍♂️ **Autor**
+
+<p>
+ <img src="https://avatars.githubusercontent.com/u/10993285?v=4" width="150px;" alt="glaubermatos"/>
+ <br />
+ <sub><strong>🌟 Glauber de Oliveira Matos 🌟</strong></sub>
+</p>
+
+[![Linkedin Badge](https://img.shields.io/badge/-linkedin-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/glaubermatos/)](https://www.linkedin.com/in/glaubermatos/)
+
+---
+
+## 📝 Licença
+
+Este projeto esta sobe a licença [MIT](./LICENSE).
+
+Feito com :satisfied: por Glauber de Oliveira Matos 👋🏽 [Entre em contato!](https://www.linkedin.com/in/glaubermatos/)
+
+---
