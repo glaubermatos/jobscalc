@@ -8,8 +8,7 @@ import { backend } from "../_lib/services/backend"
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
-    process.env.VERCEL_ENV === "production"
-      && GithubProvider({
+    GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     //   scope: 'read:user'
