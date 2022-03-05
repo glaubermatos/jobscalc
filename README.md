@@ -47,7 +47,7 @@ Cadastre seus freelas informando a quantidade de horas estimada para sua conclus
 
 Esta versão do JobsCalc foi desenvolvido com a intenção de consolidar os conhecimentos com as tecnologias NextJS (front-end) e Spring (back-end). O back-end pode ser encontrado **[AQUI](https://github.com/glaubermatos/jobscalc-api)**
 
-O projeto original jobscalc pode ser desenvolvido acessando a **[Maratona Discover 2](https://maratonadiscover.rocketseat.com.br/maratona/aula-01)** encontrado na plataforma da Rocketseat.
+O projeto original jobscalc é construído com um servidor NodeJS, EJS para template engine e SQLite como banco de dados, pode ser desenvolvido acessando a **[Maratona Discover 2](https://maratonadiscover.rocketseat.com.br/maratona/aula-01)** da Rocketseat.
 
 Então, confira o resultado no link abaixo:
 
