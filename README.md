@@ -13,7 +13,12 @@
 
 <h1 align="center">
     <img src="./public/logo.svg" />
+    <br />
+    <br />
+    <br />
+    <img alt="JobsCalc" title="JobsCalc" src=".github/cover.png" />
 </h1>
+
 
 <h4 align="center"> 
 	🚧  Aplicação finalizada! 🚧
@@ -24,23 +29,30 @@
 <p>
  👉<a href="#-sobre-o-projeto" style="text-decoration: none; "> Sobre</a> <br/>
 👉<a href="#-funcionalidades" style="text-decoration: none; "> Funcionalidades</a> <br/>
+👉<a href="#-melhorias" style="text-decoration: none; "> Melhorias</a> <br/>
 👉<a href="#-layout" style="text-decoration: none"> Layout</a> <br/>
 👉<a href="#-demonstracao" style="text-decoration: none"> Demonstração</a> <br/>
 👉<a href="#-como-executar-o-projeto" style="text-decoration: none"> Como executar</a> <br/>
 👉<a href="#-tecnologias" style="text-decoration: none"> Tecnologias</a> <br/>
 👉<a href="#-autor" style="text-decoration: none"> Autor</a> <br/>
-👉<a href="#user-content--licença" style="text-decoration: none"> Licença</a>
+👉<a href="#-user-content--licença" style="text-decoration: none"> Licença</a>
 
 </p>
 
 ## 💻 Sobre o projeto
 
-Uma aplicação para cadastrar e calcular o valor dos seus projetos freelancers de forma simples e fácil.
+Uma aplicação para cadastrar e calcular o valor dos seus projetos freelancers de forma simples e fácil. Crie seu perfil com Github, complete seu perfil informando seu planejameno financeiro e pronto, o sistema irá calcular o valor da sua hora de trabalho.
 
-Confira o resultado no link abaixo:
+Cadastre seus freelas informando a quantidade de horas estimada para sua conclusão e o sistema calcula o valor do Job com base no valor da sua hora de trabalho.
+
+Esta versão do JobsCalc foi desenvolvido com a intenção de consolidar os conhecimentos com as tecnologias NextJS (front-end) e Spring (back-end). O back-end pode ser encontrado **[AQUI](https://github.com/glaubermatos/jobscalc-api)**
+
+O projeto original jobscalc pode ser desenvolvido acessando a **[Maratona Discover 2](https://maratonadiscover.rocketseat.com.br/maratona/aula-01)** encontrado na plataforma da Rocketseat.
+
+Então, confira o resultado no link abaixo:
 
 <a align="center" href="https://jobscalc-glauber.vercel.app/">
-    <img alt="app jobscalc" src="https://img.shields.io/static/v1?label=site&message=jobscalc&color=F1972C&style=flat&logo=vercel">
+    <img alt="app jobscalc" src="https://img.shields.io/static/v1?label=aplicação web&message=jobscalc&color=F1972C&style=flat&logo=vercel">
 </a>
 
 ---
@@ -60,6 +72,25 @@ Confira o resultado no link abaixo:
   - [x] Autenticação com Next-Auth;
   - [x] Rotas privadas para usuários não autenticados;
   - [x] Notificações com Toastify;
+  - [x] Versão web mobile;
+- [x] API Routes
+  - [x] Perfil
+    - [x] POST /api/profiles - Cria um novo perfil de usuário
+    - [x] PUT /api/profiles/[profileId] - Atualiza dados do perfil do usuário
+  - [x] Jobs
+    - [x] GET /api/profiles/[profileId]/jobs - Lista os jobs do perfil do usuário
+    - [x] POST /api/profiles/[profileId]/jobs - Cria um novo job
+    - [x] PUT /api/profiles/[profileId]/jobs/[jobId] - Atualiza dados do job
+    - [x] DELETE /api/profiles/[profileId]/jobs/[jobId] - Deleta o job
+    - [ ] GET /api/profiles/[profileId]/jobs/[jobId] - Lista os dados do job
+
+---
+<a name="-melhorias"></a>
+
+## ⚙️ Melhorias
+- [ ] Usar fakeAPI para remover dependência do projeto back-end em java disponível **[AQUI](https://github.com/glaubermatos/jobscalc-api)**.
+- [ ] Mostrar um load de carregamento nas páginas enquanto o servidor não retorna os dados do backend
+- [ ] Otimização de imagens substituindo todas as tags 'img' para o component Image do NextJS
 
 ---
 
@@ -83,11 +114,14 @@ Confira o resultado no link abaixo:
 
 💡O Frontend precisa que o Backend esteja sendo executado para funcionar, que pode ser encontrado **[AQUI](https://github.com/glaubermatos/jobscalc-api)**.
 
+💡Para integração com a autenticação é preciso configurar as variáveis de ambiente para o Next-Auth se conectar com a api do Github. 
+
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/), [Yarn](https://classic.yarnpkg.com/en/docs/install).
 Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
+
 
 #### 🧭 Rodando a aplicação web (Frontend)
 
@@ -107,29 +141,53 @@ $ yarn dev
 
 # A aplicação será aberta na porta:3000 - acesse http://localhost:3000
 
+# É necessário configurar as variáveis de ambiente
+
 ```
+
+
+#### 🧭 Configure as variáveis de ambiente
+
+Configure o github para permitir autenticação, crie uma OAuth App **[AQUI](https://github.com/settings/developers)**.
+
+```bash
+
+# Copie o arquivo .env.local.example para a raiz do seu projeto renomeando para .env.local (que será ignorado pelo Git):
+$ cp .env.local.example .env.local
+
+```
+
+Adicione detalhes para um ou mais provedores (por exemplo, Google, Twitter, GitHub, Email etc.).
+
+Para ver detalhes da implementação do Next-Auth **[AQUI](https://next-auth.js.org/getting-started/example)**.
+
+Saiba mais sobre o [Next-Auth](https://nextjs.org/).
+
 
 ---
 
 ## 🛠 Tecnologias
 
+Este é um projeto Next.js inicializado com create-next-app.
 As seguintes ferramentas foram usadas na construção do projeto:
 
 #### **Aplicação web** ([NextJS](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/))
 
-- **[React Icons](https://react-icons.github.io/react-icons/)**
-- **[React-Leaflet](https://react-leaflet.js.org/)**
+- **[Next-Auth](https://next-auth.js.org/)**
 - **[Axios](https://github.com/axios/axios)**
+- **[React Icons](https://react-icons.github.io/react-icons/)**
+- **[React Modal](http://reactcommunity.org/react-modal/)**
 - **[react-toastify](https://fkhadra.github.io/react-toastify/introduction)**
+- **[sass](https://sass-lang.com/)**
 
-> Veja o arquivo [package.json](https://github.com/glaubermatos/jobscalc/package.json)
+> Veja o arquivo [package.json](https://github.com/glaubermatos/jobscalc/blob/main/package.json)
 
 #### **Utilitários**
 
 - Editor: **[Visual Studio Code](https://code.visualstudio.com/)**
 - Teste de API: **[Insomnia](https://insomnia.rest/)**
 - Ícones: **[Feather Icons](https://feathericons.com/)**
-- Fontes: **[Fontes](https://fonts.google.com/specimen/Nunito)**
+- Fontes: **[IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans)** | **[Inter](https://fonts.google.com/specimen/Inter)**
 
 ---
 
@@ -146,6 +204,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 [![Linkedin Badge](https://img.shields.io/badge/-linkedin-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/glaubermatos/)](https://www.linkedin.com/in/glaubermatos/)
 
 ---
+<a name="-user-content--licença"></a>
 
 ## 📝 Licença
 
