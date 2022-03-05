@@ -98,6 +98,18 @@ Então, confira o resultado no link abaixo:
 
 - **[Layout Frontend](https://www.figma.com/file/1YbzIzsyRCfaDt86iUb6Lw/Jobs-Planning-Maratona-Discover2-Copy)**
 
+- ### Personalizações no layout
+  - [x] Criação do design da página de login com github.
+  - [x] Customização da pagina de edição de job
+    - [x] Criação de componente para alteração de status.
+  - [ ] Versão para web mobile
+
+#### Página de login com github
+<img src=".github/signin.jpg" width="800px" />
+
+#### Página de edição de jobs
+<img src=".github/edit-job.png" width="800px"/>
+
 ---
 
 <a name="-demonstracao"></a>
